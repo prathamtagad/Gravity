@@ -1,0 +1,29 @@
+appId: com.gravitystudy.app
+productName: Gravity Study
+copyright: Copyright © 2024
+
+directories:
+  buildResources: build
+  output: dist-electron
+
+files:
+  - dist/**/*
+  - electron/**/*
+  - package.json
+
+win:
+  target:
+    - nsis
+    - portable
+  icon: build/icon.ico
+  requestedExecutionLevel: requireAdministrator
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}
+
