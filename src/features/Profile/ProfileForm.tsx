@@ -18,7 +18,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ onSave, onCancel }) => {
   const { profile, updateProfile } = useUserStore()
   const [displayName, setDisplayName] = useState(profile?.displayName || '')
   const [bio, setBio] = useState(profile?.bio || '')
-  const [subjects, setSubjects] = useState<string[]>(profile?.subjects || [])
+  const [subjects] = useState<string[]>(profile?.subjects || [])
   const [teachingSubjects, setTeachingSubjects] = useState<string[]>(profile?.teachingSubjects || [])
   const [learningSubjects, setLearningSubjects] = useState<string[]>(profile?.learningSubjects || [])
   const [photoFile, setPhotoFile] = useState<File | null>(null)
@@ -28,25 +28,25 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ onSave, onCancel }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const [isAddingSubject, setIsAddingSubject] = useState(false)
-  const [customSubject, setCustomSubject] = useState('')
+  // const [isAddingSubject, setIsAddingSubject] = useState(false)
+  // const [customSubject, setCustomSubject] = useState('')
 
-  const handleSubjectToggle = (subject: string) => {
-    setSubjects((prev) =>
-      prev.includes(subject)
-        ? prev.filter((s) => s !== subject)
-        : [...prev, subject]
-    )
-  }
+  // const handleSubjectToggle = (subject: string) => {
+  //   setSubjects((prev) =>
+  //     prev.includes(subject)
+  //       ? prev.filter((s) => s !== subject)
+  //       : [...prev, subject]
+  //   )
+  // }
 
-  const handleAddCustomSubject = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (customSubject.trim() && !subjects.includes(customSubject.trim())) {
-      setSubjects([...subjects, customSubject.trim()])
-      setCustomSubject('')
-      setIsAddingSubject(false)
-    }
-  }
+  // const handleAddCustomSubject = (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   if (customSubject.trim() && !subjects.includes(customSubject.trim())) {
+  //     setSubjects([...subjects, customSubject.trim()])
+  //     setCustomSubject('')
+  //     setIsAddingSubject(false)
+  //   }
+  // }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]

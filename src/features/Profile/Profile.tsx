@@ -8,7 +8,7 @@ import Loading from '@components/Loading/Loading'
 
 const Profile: React.FC = () => {
   const { user } = useAuthStore()
-  const { profile, loadProfile, setProfile } = useUserStore()
+  const { profile, loadProfile } = useUserStore()
   const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(true)
 

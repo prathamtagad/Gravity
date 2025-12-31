@@ -14,6 +14,7 @@ interface CollisionState {
   ) => Promise<string>
   acceptCollision: (collisionId: string, userId: string) => Promise<void>
   declineCollision: (collisionId: string) => Promise<void>
+  expireCollision: (collisionId: string) => Promise<void>
 }
 
 export const useCollisionStore = create<CollisionState>((set) => ({
@@ -49,7 +50,7 @@ export const useCollisionStore = create<CollisionState>((set) => ({
 
     return collisionId
   },
-  expireCollision: async (collisionId) => {
+  expireCollision: async (collisionId: string) => {
     await updateCollisionStatus(collisionId, 'expired')
     set((state) => ({
       activeCollisions: state.activeCollisions.filter((c) => c.id !== collisionId),

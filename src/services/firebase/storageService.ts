@@ -83,7 +83,7 @@ const fileToBase64 = (file: File): Promise<string> => {
  * @returns Base64 data URI string
  */
 export const uploadProfileImage = async (
-  userId: string,
+  _userId: string,
   file: File
 ): Promise<string> => {
   try {
@@ -113,12 +113,7 @@ export const uploadProfileImage = async (
   }
 }
 
-/**
- * Delete profile image (no-op for Base64 storage)
- * Images are stored in Firestore documents, so deletion happens when profile is updated
- * @param imagePath - Base64 data URI (kept for API consistency)
- */
-export const deleteProfileImage = async (imagePath: string): Promise<void> => {
+export const deleteProfileImage = async (_imagePath: string): Promise<void> => {
   // No-op: Base64 images are stored in Firestore, deletion happens automatically
   // when profile is updated with a new image or empty string
   console.log('Base64 image deletion is handled by profile updates')

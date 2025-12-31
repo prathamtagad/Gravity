@@ -10,7 +10,7 @@ interface AuthState {
   initializeAuth: () => void
 }
 
-export const useAuthStore = create<AuthState>((set, get) => {
+export const useAuthStore = create<AuthState>((set) => {
   let unsubscribe: (() => void) | null = null
 
   return {

@@ -238,7 +238,19 @@ export const updateCollisionUserStatus = async (
 }
 
 // Session Operations
-// ... (existing sessions functions)
+const SESSIONS_COLLECTION = 'sessions'
+
+export const createStudySession = async (session: any) => {
+  const sessionsRef = collection(db, SESSIONS_COLLECTION)
+  const docRef = doc(sessionsRef)
+  await setDoc(docRef, { ...session, id: docRef.id })
+  return docRef.id
+}
+
+export const updateStudySession = async (sessionId: string, updates: any) => {
+  const sessionRef = doc(db, SESSIONS_COLLECTION, sessionId)
+  await updateDoc(sessionRef, updates)
+}
 
 // Social / Follow Operations
 export const followUser = async (followerId: string, followingId: string) => {

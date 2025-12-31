@@ -1,5 +1,5 @@
 
-import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, query, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './config';
 
 export const clearAllCollisions = async () => {
