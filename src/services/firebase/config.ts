@@ -16,20 +16,16 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID as string,
 }
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig)
 
-// Initialize services
 export const auth = getAuth(app)
 
-// Initialize Firestore with modern persistence configuration
 export const db = initializeFirestore(app, {
   localCache: persistentLocalCache({
     tabManager: persistentMultipleTabManager()
   })
 })
 
-// Initialize Analytics (optional, free)
 if (typeof window !== 'undefined') {
   isSupported().then((yes) => {
     if (yes) {
@@ -39,4 +35,3 @@ if (typeof window !== 'undefined') {
 }
 
 export default app
-

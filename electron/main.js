@@ -16,12 +16,11 @@ function createWindow() {
       contextIsolation: true,
       enableRemoteModule: false,
     },
-    icon: path.join(__dirname, '../public/icon.png'), // Add icon if available
+    icon: path.join(__dirname, '../public/icon.png'),
     titleBarStyle: 'default',
-    show: false, // Don't show until ready
+    show: false,
   })
 
-  // Load the app
   if (isDev) {
     mainWindow.loadURL('http://localhost:5173')
     mainWindow.webContents.openDevTools()
@@ -29,7 +28,6 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, '../dist/index.html'))
   }
 
-  // Show window when ready to prevent visual flash
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
@@ -39,7 +37,6 @@ function createWindow() {
   })
 }
 
-// Create application menu
 function createMenu() {
   const template = [
     {
@@ -109,10 +106,8 @@ app.on('window-all-closed', () => {
   }
 })
 
-// Security: Prevent new window creation
 app.on('web-contents-created', (event, contents) => {
   contents.on('new-window', (event, navigationUrl) => {
     event.preventDefault()
   })
 })
-

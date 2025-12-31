@@ -15,7 +15,7 @@ interface MapState {
 }
 
 export const useMapStore = create<MapState>((set) => ({
-  center: { lat: 37.7749, lng: -122.4194 }, // Default: San Francisco
+  center: { lat: 37.7749, lng: -122.4194 },
   zoom: 15,
   users: [],
   currentLocation: null,
@@ -26,4 +26,3 @@ export const useMapStore = create<MapState>((set) => ({
   setCurrentLocation: (location) => set({ currentLocation: location }),
   setHeatMapMode: (isHeatMapMode) => set({ isHeatMapMode }),
 }))
-

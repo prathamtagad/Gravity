@@ -15,9 +15,6 @@ const CollisionRequest: React.FC = () => {
     declineCollision 
   } = useCollisionStore()
   
-  // Track notifications to show
-  // We only show the latest pending request for simplicity, 
-  // or a stack if necessary. For now, just the first relevant one.
   const [request, setRequest] = useState<Collision | null>(null)
 
   useEffect(() => {
@@ -26,27 +23,19 @@ const CollisionRequest: React.FC = () => {
     const unsubscribe = subscribeToUserCollisions(user.uid, (collisions) => {
       setActiveCollisions(collisions)
 
-      // Check if we have an active collision where we are accepted -> redirect to session
-      // Check if we have a collision where both accepted -> redirect to session
-      
       const sessionReady = collisions.find(c => {
         const ready = c.user1Status === 'accepted' && c.user2Status === 'accepted'
         return ready
       })
 
       if (sessionReady) {
-        // Start session if not already handled elsewhere (or just navigate)
-        // Ideally session creation happens on the backend or triggered by one client
-        // For this demo, we just navigate to the collision view which mounts EventHorizon
         navigate(`/collision/${sessionReady.id}`)
         return
       }
 
-      // Find a relevant active collision for ME (Pending or Accepted but waiting)
       const activeInteraction = collisions.find(c => {
         const isUser1 = c.userId1 === user.uid
         const myStatus = isUser1 ? c.user1Status : c.user2Status
-        // Show if I am pending (need to answer) OR if I accepted (waiting for them)
         return c.status === 'active' && (myStatus === 'pending' || myStatus === 'accepted')
       })
 

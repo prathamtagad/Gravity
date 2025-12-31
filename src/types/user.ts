@@ -8,7 +8,7 @@ export type OrbitStatus =
   | 'In Orbit'
   | 'High Gravity'
   | 'Event Horizon'
-  | string // Allow string fallback for now to prevent breaking existing data immediately
+  | string
 
 export interface UserProfile {
   id: string
@@ -16,24 +16,24 @@ export interface UserProfile {
   displayName: string
   photoURL?: string
   bio?: string
-  subjects: string[] // General interests
-  teachingSubjects?: string[] // Skills user can teach
-  learningSubjects?: string[] // Skills user wants to learn
+  subjects: string[]
+  teachingSubjects?: string[]
+  learningSubjects?: string[]
   location?: UserLocation
   orbitStatus?: OrbitStatus
   eventHorizonEndTime?: number 
-  mass: number // XP points
-  level: number // Calculated from mass
-  rank?: string // Star-based rank (e.g. "Protostar")
+  mass: number
+  level: number
+  rank?: string
   followersCount: number
   followingCount: number
-  messageCount?: number // Added for quests
+  messageCount?: number
   createdAt: number
   updatedAt: number
 }
 
 export interface FollowRelationship {
-  id: string; // followerId_followingId
+  id: string;
   followerId: string;
   followingId: string;
   createdAt: number;
@@ -59,6 +59,5 @@ export interface StudySession {
   participants: string[]
   startTime: number
   endTime?: number
-  duration: number // in minutes (15 for Event Horizon)
+  duration: number
 }
-

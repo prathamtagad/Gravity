@@ -5,12 +5,12 @@ import {
   setDoc,
   updateDoc,
   query,
-  where,
-  orderBy,
   limit,
+  orderBy,
   onSnapshot,
   serverTimestamp,
-  increment
+  increment,
+  where
 } from 'firebase/firestore'
 import { db } from './config'
 import type { Message, Conversation } from '@/types/chat'
@@ -19,7 +19,6 @@ import { UserProfile } from '@/types/user'
 const CONVERSATIONS_COLLECTION = 'conversations'
 const MESSAGES_COLLECTION = 'messages'
 
-// Helper to ensure consistent conversation IDs (e.g., lexical sort of UIDs)
 export const getConversationId = (uid1: string, uid2: string) => {
   return [uid1, uid2].sort().join('_')
 }
@@ -31,8 +30,6 @@ export const createOrGetConversation = async (
   const conversationId = getConversationId(currentUser.id, otherUser.id)
   const conversationRef = doc(db, CONVERSATIONS_COLLECTION, conversationId)
   
-  // Optimize: Use setDoc with merge to avoid "read permission" issues on non-existent docs
-  // and to reduce read operations.
   await setDoc(conversationRef, {
     id: conversationId,
     participants: [currentUser.id, otherUser.id],
@@ -47,10 +44,6 @@ export const createOrGetConversation = async (
       }
     },
     updatedAt: serverTimestamp(),
-    // Only set createdAt if it doesn't exist (merge won't overwrite existing fields if not specified, 
-    // but here we are specifying it. To truly only set on create, we'd need a different approach or keep getDoc.
-    // For now, let's stick to getDoc BUT handle the error gracefully or just tell user to fix rules.
-    // Actually, let's keep the getDoc but wrap in try/catch to debug better.
   }, { merge: true })
 
   return conversationId
@@ -64,7 +57,6 @@ export const sendMessage = async (
   const conversationRef = doc(db, CONVERSATIONS_COLLECTION, conversationId)
   const messagesRef = collection(conversationRef, MESSAGES_COLLECTION)
 
-  // Add message
   await addDoc(messagesRef, {
     text,
     senderId,
@@ -72,18 +64,16 @@ export const sendMessage = async (
     readBy: [senderId]
   })
 
-  // Update conversation last message
   await updateDoc(conversationRef, {
     lastMessage: {
       text,
       senderId,
-      createdAt: Date.now(), // Use client time for immediate sort
+      createdAt: Date.now(),
       read: false
     },
     updatedAt: serverTimestamp()
   })
 
-  // Update sender message count for quests
   const senderRef = doc(db, 'users', senderId)
   await updateDoc(senderRef, {
     messageCount: increment(1),
@@ -120,7 +110,6 @@ export const subscribeToUserConversations = (
   callback: (conversations: Conversation[]) => void
 ) => {
   const conversationsRef = collection(db, CONVERSATIONS_COLLECTION)
-  // Firestore array-contains check
   const q = query(
     conversationsRef, 
     where('participants', 'array-contains', userId),

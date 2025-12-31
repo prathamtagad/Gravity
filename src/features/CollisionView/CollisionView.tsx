@@ -29,7 +29,6 @@ const CollisionView: React.FC = () => {
           expiresAt: data.expiresAt || Date.now() + 15 * 60 * 1000,
         } as Collision)
       } else {
-        // Collision doesn't exist or was deleted
         navigate('/')
       }
       setLoading(false)
@@ -56,7 +55,6 @@ const CollisionView: React.FC = () => {
     )
   }
 
-  // Check if user is part of this collision
   if (collision.userId1 !== user?.uid && collision.userId2 !== user?.uid) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -76,4 +74,3 @@ const CollisionView: React.FC = () => {
 }
 
 export default CollisionView
-

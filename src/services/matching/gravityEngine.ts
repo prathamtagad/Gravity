@@ -1,7 +1,7 @@
 import { UserProfile } from '@/types/user';
 
 export interface MatchingResult {
-  score: number; // 0-100
+  score: number;
   reasons: string[];
   badges: string[];
   icebreaker?: string;
@@ -26,14 +26,6 @@ const getIcebreaker = (user: UserProfile, matchType: 'skill' | 'subject', subjec
   return customPrompt ? `Ask ${user.displayName}: "${customPrompt}"` : `Hey ${user.displayName}! I saw we're both studying ${subject}. Want to compare notes?`;
 };
 
-/**
- * Calculates the "Gravity Pull" Compatibility Score between two users.
- * Logic:
- * 1. Shared General Subjects: +15 points each (max 45)
- * 2. Perfect Teach/Learn Match: +40 points (user A teaches what B wants to learn)
- * 3. Proximity: +15 points if distance < 500m (already filtered typically, but adds weight)
- * 4. Complementary Status: +10 points if both are "In Orbit"
- */
 export const calculateGravityPull = (
   user1: UserProfile,
   user2: UserProfile
@@ -43,7 +35,6 @@ export const calculateGravityPull = (
   const badges: string[] = [];
   let icebreaker: string | undefined;
 
-  // 2. Skill Trading (The powerful match) - Checked first for high priority icebreaker
   if (user2.teachingSubjects && user1.learningSubjects) {
     const skillMatch = user2.teachingSubjects.find(s => user1.learningSubjects?.includes(s));
     if (skillMatch) {
@@ -63,7 +54,6 @@ export const calculateGravityPull = (
     }
   }
 
-  // 1. Shared General Subjects
   if (user1.subjects && user2.subjects) {
     const shared = user1.subjects.filter(s => user2.subjects.includes(s));
     if (shared.length > 0) {
@@ -72,20 +62,17 @@ export const calculateGravityPull = (
       reasons.push(`${shared.length} shared interests`);
       if (shared.length >= 3) badges.push('Twin Stars');
       
-      // If no skill icebreaker yet, use first shared subject
       if (!icebreaker) {
         icebreaker = getIcebreaker(user2, 'subject', shared[0]);
       }
     }
   }
 
-  // 3. Status Synergy
   if (user1.orbitStatus === user2.orbitStatus && user1.orbitStatus === 'In Orbit') {
     score += 15;
     reasons.push('Both ready to collide');
   }
 
-  // Cap at 100
   score = Math.min(score, 100);
 
   return {
@@ -96,12 +83,7 @@ export const calculateGravityPull = (
   };
 };
 
-/**
- * Gamification Helper: Calculates level based on mass (Logarithmic-ish progression)
- */
 export const calculateLevelInfo = (mass: number = 0) => {
-  // Lvl 1: 0-100, Lvl 2: 100-300, Lvl 3: 300-600, etc.
-  // Formula: level = floor(sqrt(mass/50))
   const level = Math.floor(Math.sqrt(mass / 50)) + 1;
   const ranks = [
     'Stellar Dust',

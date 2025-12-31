@@ -88,7 +88,6 @@ const BlackHoleTimer: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-[3000] bg-white flex flex-col items-center justify-center overflow-hidden transition-all duration-1000 font-sans">
-      {/* Soft Light Aura Particles */}
       {particles.map((p, i) => (
         <div 
             key={i}
@@ -103,7 +102,6 @@ const BlackHoleTimer: React.FC = () => {
         />
       ))}
 
-      {/* Hero Timer */}
       <div className="relative mb-20">
         <div className="w-80 h-80 rounded-full bg-white border border-neutral-100 shadow-[0_40px_120px_rgb(0,0,0,0.08)] relative z-10 flex flex-col items-center justify-center animate-reveal-up">
              <div className="text-[10px] font-bold text-neutral-300 uppercase tracking-[0.5em] mb-4">Focus Protocol</div>

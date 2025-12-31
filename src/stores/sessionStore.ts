@@ -18,7 +18,7 @@ export const useSessionStore = create<SessionState>((set) => ({
       collisionId,
       participants,
       startTime: now,
-      duration: 15, // 15 minutes for Event Horizon
+      duration: 15,
     }
 
     const sessionId = await createStudySession(sessionData)
@@ -33,4 +33,3 @@ export const useSessionStore = create<SessionState>((set) => ({
     set({ activeSession: null })
   },
 }))
-

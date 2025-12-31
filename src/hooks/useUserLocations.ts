@@ -8,7 +8,6 @@ export const useUserLocations = () => {
 
   useEffect(() => {
     const unsubscribe = subscribeToAllUsers((users: UserProfile[]) => {
-      // Filter users with valid locations
       const usersWithLocations = users.filter(
         (user) => user.location && user.location.latitude && user.location.longitude
       )
@@ -20,4 +19,3 @@ export const useUserLocations = () => {
     }
   }, [setUsers])
 }
-

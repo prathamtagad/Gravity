@@ -1,14 +1,10 @@
 import type { UserProfile, UserLocation } from '@/types/user'
 
-/**
- * Calculate distance between two coordinates using Haversine formula
- * Returns distance in meters
- */
 export const calculateDistance = (
   loc1: UserLocation,
   loc2: UserLocation
 ): number => {
-  const R = 6371e3 // Earth's radius in meters
+  const R = 6371e3
   const φ1 = (loc1.latitude * Math.PI) / 180
   const φ2 = (loc2.latitude * Math.PI) / 180
   const Δφ = ((loc2.latitude - loc1.latitude) * Math.PI) / 180
@@ -22,21 +18,15 @@ export const calculateDistance = (
   return R * c
 }
 
-/**
- * Check if two users are within collision range (100m)
- */
 export const isWithinCollisionRange = (
   user1: UserProfile,
   user2: UserProfile
 ): boolean => {
   if (!user1.location || !user2.location) return false
   const distance = calculateDistance(user1.location, user2.location)
-  return distance <= 100 // 100 meters
+  return distance <= 100
 }
 
-/**
- * Check if two users have matching orbit status
- */
 export const hasMatchingStatus = (
   user1: UserProfile,
   user2: UserProfile
@@ -48,9 +38,6 @@ export const hasMatchingStatus = (
   )
 }
 
-/**
- * Detect collisions between current user and all other users
- */
 export const detectCollisions = (
   currentUser: UserProfile,
   allUsers: UserProfile[]
@@ -63,4 +50,3 @@ export const detectCollisions = (
     )
   })
 }
-

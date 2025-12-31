@@ -24,7 +24,7 @@ export const useCollisionStore = create<CollisionState>((set) => ({
   setPotentialMatches: (matches) => set({ potentialMatches: matches }),
   createNewCollision: async (user1, user2, matchedStatus) => {
     const now = Date.now()
-    const expiresAt = now + 15 * 60 * 1000 // 15 minutes
+    const expiresAt = now + 15 * 60 * 1000
 
     const collisionData = {
       userId1: user1.id,
@@ -32,7 +32,7 @@ export const useCollisionStore = create<CollisionState>((set) => ({
       user1Profile: user1,
       user2Profile: user2,
       status: 'active' as const,
-      user1Status: 'accepted' as const, // Creator automatically accepts
+      user1Status: 'accepted' as const,
       user2Status: 'pending' as const,
       createdAt: now,
       expiresAt,
@@ -58,7 +58,6 @@ export const useCollisionStore = create<CollisionState>((set) => ({
   },
   acceptCollision: async (collisionId, userId) => {
     await updateCollisionUserStatus(collisionId, userId, 'accepted')
-    // Local state will be updated via subscription
   },
   declineCollision: async (collisionId) => {
     await updateCollisionStatus(collisionId, 'expired')
@@ -67,4 +66,3 @@ export const useCollisionStore = create<CollisionState>((set) => ({
     }))
   },
 }))
-

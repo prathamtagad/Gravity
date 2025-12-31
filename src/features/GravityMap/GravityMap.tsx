@@ -16,7 +16,6 @@ import { getZoneStatus } from '@services/map/heatZoneService'
 import LiveActivityTicker from '@components/Map/LiveActivityTicker'
 import type { UserProfile, UserLocation } from '@/types/user'
 
-// Simple clustering function (groups markers within 50m)
 const clusterMarkers = (users: UserProfile[], zoom: number) => {
   if (zoom > 15) {
     return users.map((user) => ({ type: 'user' as const, user, cluster: null }))
@@ -35,7 +34,7 @@ const clusterMarkers = (users: UserProfile[], zoom: number) => {
       if (!user.location || !other.location) return false 
       const latDiff = Math.abs(user.location.latitude - other.location.latitude)
       const lngDiff = Math.abs(user.location.longitude - other.location.longitude)
-      return latDiff < 0.0005 && lngDiff < 0.0005 // ~50m
+      return latDiff < 0.0005 && lngDiff < 0.0005 
     })
 
     if (nearbyUsers.length > 0) {
@@ -240,10 +239,7 @@ const GravityMap: React.FC = () => {
           </Marker>
         )}
 
-        {/* Campus Ghost - Heat Zones */}
         {isHeatMapMode && getZoneStatus(users).map((zone) => {
-          // Calculate color based on vibe: Red (1) -> Blue (-1)
-          // 0 vibe (balanced) -> Purple/Neutral
           const redValue = Math.max(0, zone.vibeScore) * 255
           const blueValue = Math.max(0, -zone.vibeScore) * 255
           const color = `rgb(${redValue}, 100, ${blueValue})`
@@ -374,7 +370,6 @@ const GravityMap: React.FC = () => {
                       className="py-3 bg-neutral-900 hover:bg-black text-white text-[10px] font-bold rounded-2xl transition-all uppercase tracking-widest shadow-lg active:scale-95"
                       onClick={() => {
                           if (!user || !profile) return
-                          // Extract just the quote part if it's an "Ask John: ..." prompt
                           const quoteMatch = match?.icebreaker?.match(/"([^"]+)"/);
                           const cleanMessage = quoteMatch ? quoteMatch[1] : match?.icebreaker;
                           
@@ -392,7 +387,6 @@ const GravityMap: React.FC = () => {
         })}
       </MapContainer>
 
-      {/* Heat Map Toggle UI */}
       <div className="absolute top-24 left-6 z-[1000] flex flex-col gap-4">
         <button
           onClick={() => setHeatMapMode(!isHeatMapMode)}

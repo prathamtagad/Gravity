@@ -10,19 +10,17 @@ interface ChatState {
   activeRecipient: UserProfile | null
   conversations: Conversation[]
   messages: Message[]
-  suggestedMessage: string | null // For icebreakers
+  suggestedMessage: string | null
   
-  // Actions
   openChat: (recipient: UserProfile, currentUser: UserProfile, suggestedMessage?: string) => Promise<void>
   setSuggestedMessage: (message: string | null) => void
-  openInbox: () => void  // Added
+  openInbox: () => void
   closeChat: () => void
   minimizeChat: () => void
   maximizeChat: () => void
   
   sendMessage: (text: string, senderId: string) => Promise<void>
   
-  // Subscriptions
   subscribeToConversations: (userId: string) => () => void
   subscribeToActiveChat: (conversationId: string) => () => void
 }

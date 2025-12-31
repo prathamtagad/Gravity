@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { useUserStore } from '@stores/userStore'
-// import { useMapStore } from '@stores/mapStore'
-// import { detectCollisions } from '@services/collisionService'
 import Modal from '@components/Modal/Modal'
 import Button from '@components/Button/Button'
 import Alert from '@components/Alert/Alert'
@@ -36,24 +34,18 @@ interface OrbitStatusProps {
 
 const OrbitStatus: React.FC<OrbitStatusProps> = () => {
   const { profile, updateProfile } = useUserStore()
-  // const { users } = useMapStore()
-  // const { setPotentialMatches, createNewCollision } = useCollisionStore()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showAlert, setShowAlert] = useState(false)
   const [alertMessage] = useState('')
 
-  // No background collision detection. 
-  // Collision requests are now strictly manual via the Map "Connect" button.
   const handleStatusChange = async (mode: typeof ORBIT_MODES[0]) => {
     if (!profile) return
     try {
       const updates: any = { orbitStatus: mode.label }
       
       if (mode.label === 'Event Horizon') {
-        // Set timer for 25 minutes from now
         updates.eventHorizonEndTime = Date.now() + 25 * 60 * 1000
       } else {
-        // Clear timer
         updates.eventHorizonEndTime = null
       }
 
@@ -68,7 +60,6 @@ const OrbitStatus: React.FC<OrbitStatusProps> = () => {
 
   return (
     <>
-      {/* Floating Status Card */}
       <div className="fixed bottom-6 left-4 right-4 md:left-auto md:right-8 md:w-96 z-[1000] animate-reveal-up" style={{ animationDelay: '0.6s' }}>
         <div className="glass-panel p-1 rounded-3xl bg-gradient-to-r from-white/90 to-white/70 shadow-2xl shadow-purple-500/10 border-white/50">
           <div className="bg-white/40 backdrop-blur-md rounded-[22px] p-4 border border-white/40">
@@ -108,7 +99,6 @@ const OrbitStatus: React.FC<OrbitStatusProps> = () => {
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
                   </span>
                 </div>
-                {/* Decorative background glow */}
                 <div className="absolute -right-4 -top-4 w-20 h-20 bg-gravity-primary/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
               </div>
             ) : (
@@ -155,7 +145,6 @@ const OrbitStatus: React.FC<OrbitStatusProps> = () => {
                 </div>
               </div>
               
-              {/* Active Indicator */}
               {profile.orbitStatus === mode.label && (
                 <div className="absolute top-4 right-4 w-3 h-3 rounded-full bg-gravity-primary animate-pulse" />
               )}

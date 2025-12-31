@@ -28,26 +28,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ onSave, onCancel }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // const [isAddingSubject, setIsAddingSubject] = useState(false)
-  // const [customSubject, setCustomSubject] = useState('')
-
-  // const handleSubjectToggle = (subject: string) => {
-  //   setSubjects((prev) =>
-  //     prev.includes(subject)
-  //       ? prev.filter((s) => s !== subject)
-  //       : [...prev, subject]
-  //   )
-  // }
-
-  // const handleAddCustomSubject = (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   if (customSubject.trim() && !subjects.includes(customSubject.trim())) {
-  //     setSubjects([...subjects, customSubject.trim()])
-  //     setCustomSubject('')
-  //     setIsAddingSubject(false)
-  //   }
-  // }
-
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
@@ -125,7 +105,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ onSave, onCancel }) => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-16 max-w-3xl mx-auto">
-          {/* Information Selection */}
           <div className="space-y-12">
             <div className="space-y-10">
                 <div className="group">
@@ -153,7 +132,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ onSave, onCancel }) => {
             </div>
           </div>
 
-          {/* Dynamic Grid Selection */}
           <div className="space-y-12">
             <div className="flex items-center gap-4">
                 <span className="text-[11px] font-bold text-neutral-900 uppercase tracking-widest">Specialization Matrix</span>
@@ -207,7 +185,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ onSave, onCancel }) => {
             </div>
           </div>
 
-          {/* Action Synchronization */}
           <div className="pt-16 flex flex-col md:flex-row gap-6">
             <button 
               type="button" 

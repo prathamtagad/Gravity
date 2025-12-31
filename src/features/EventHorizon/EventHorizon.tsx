@@ -50,7 +50,6 @@ const EventHorizon: React.FC<EventHorizonProps> = ({ collision, currentUserId })
             <p className="text-neutral-400 mt-2 font-medium">Shared focus session with {otherUser.displayName}</p>
         </div>
 
-        {/* Circular Timer - Aura Style */}
         <div className="relative w-72 h-72 mx-auto mb-16">
           <svg className="transform -rotate-90 w-full h-full">
             <circle

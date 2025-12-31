@@ -29,7 +29,6 @@ export const ChatWidget: React.FC = () => {
   const [inputText, setInputText] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  // Pre-fill icebreaker if present
   useEffect(() => {
     if (suggestedMessage && isOpen) {
         setInputText(suggestedMessage)
@@ -37,7 +36,6 @@ export const ChatWidget: React.FC = () => {
     }
   }, [suggestedMessage, setSuggestedMessage, isOpen])
 
-  // Subscribe to conversations list on mount
   useEffect(() => {
     if (user) {
         const unsubscribe = subscribeToConversations(user.uid)
@@ -45,12 +43,10 @@ export const ChatWidget: React.FC = () => {
     }
   }, [user, subscribeToConversations])
 
-  // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // Subscribe to messages
   useEffect(() => {
     if (activeConversationId) {
       const unsubscribe = subscribeToActiveChat(activeConversationId)
@@ -71,15 +67,12 @@ export const ChatWidget: React.FC = () => {
   }
   
   const handleConversationClick = (conv: Conversation) => {
-      // Find the "other" participant
       if (!user || !profile) return
       const otherId = conv.participants.find(id => id !== user.uid)
       if (!otherId) return
 
       const partnerProfile = conv.participantProfiles?.[otherId]
       if (partnerProfile) {
-          // Construct a partial profile enough to open chat
-          // Ideally we would fetch the full profile, but this is enough for the header
           openChat({ id: otherId, ...partnerProfile } as any, profile)
       }
   }
@@ -114,7 +107,6 @@ export const ChatWidget: React.FC = () => {
 
   return (
     <div className="fixed bottom-4 right-4 w-96 h-[500px] flex flex-col bg-white rounded-2xl shadow-2xl z-[2000] border border-gray-100 overflow-hidden animate-slide-up font-sans">
-      {/* Header */}
       <div className="px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex justify-between items-center shrink-0">
         <div className="flex items-center gap-3">
             {!isInbox && (
@@ -159,7 +151,6 @@ export const ChatWidget: React.FC = () => {
       </div>
 
       {isInbox ? (
-          // INBOX VIEW
           <div className="flex-1 overflow-y-auto bg-gray-50 p-2 space-y-2">
               {conversations.length === 0 ? (
                    <div className="h-full flex flex-col items-center justify-center text-gray-400 text-center space-y-2">
@@ -197,9 +188,7 @@ export const ChatWidget: React.FC = () => {
               )}
           </div>
       ) : (
-          // CHAT VIEW
           <>
-              {/* Messages Area */}
               <div className="flex-1 bg-gray-50 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gray-300">
                 {messages.length === 0 ? (
                    <div className="h-full flex flex-col items-center justify-center text-gray-400 text-center space-y-2">
@@ -230,7 +219,6 @@ export const ChatWidget: React.FC = () => {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Input Area */}
               <form onSubmit={handleSend} className="p-3 bg-white border-t border-gray-100 shrink-0">
                 <div className="flex items-center gap-2 bg-gray-50 rounded-full px-4 py-2 border border-gray-200 focus-within:ring-2 focus-within:ring-indigo-100 transition-all">
                   <input 
@@ -257,4 +245,5 @@ export const ChatWidget: React.FC = () => {
   )
 }
 
+export const ChatWidgetName = 'ChatWidget'
 export default ChatWidget

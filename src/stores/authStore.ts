@@ -20,7 +20,6 @@ export const useAuthStore = create<AuthState>((set) => {
     setLoading: (loading) => set({ loading }),
     initializeAuth: () => {
       if (!unsubscribe) {
-        // Initialize auth listener
         unsubscribe = onAuthChange((user) => {
           set({ user, loading: false })
         })
@@ -28,4 +27,3 @@ export const useAuthStore = create<AuthState>((set) => {
     },
   }
 })
-

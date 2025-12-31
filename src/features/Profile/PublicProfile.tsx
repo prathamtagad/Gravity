@@ -84,13 +84,11 @@ const PublicProfile: React.FC = () => {
 
   return (
     <div className="min-h-[calc(100vh-120px)] lg:min-h-[calc(100vh-80px)] bg-neutral-50 flex flex-col animate-reveal-up overflow-x-hidden relative">
-      {/* Soft Light Aura Background */}
       <div className="fixed inset-0 z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(99,102,241,0.02),transparent_30%)]" />
       </div>
 
       <div className="w-full flex-1 flex flex-col relative z-10 font-sans">
-        {/* Navigation Head */}
         <div className="max-w-7xl mx-auto w-full px-6 pt-12">
              <button 
                 onClick={() => navigate(-1)}
@@ -103,11 +101,9 @@ const PublicProfile: React.FC = () => {
             </button>
         </div>
 
-        {/* Aura Public Profile Content */}
         <div className="max-w-7xl mx-auto w-full px-6 pt-16 pb-32">
             <div className="flex flex-col">
                 
-                {/* Identity Module */}
                 <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-between gap-12">
                     <div className="flex flex-col md:flex-row items-center gap-12 text-center md:text-left">
                         <div className="relative">
@@ -161,7 +157,6 @@ const PublicProfile: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Quantitative Hub */}
                 <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-12 mt-24">
                     <div className="flex flex-col">
                         <span className="text-5xl font-bold text-neutral-900 tabular-nums leading-none">{(targetProfile.mass || 0).toLocaleString()}</span>
@@ -181,10 +176,8 @@ const PublicProfile: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Qualitative Grid */}
                 <div className="w-full grid lg:grid-cols-12 gap-12 mt-24">
                     
-                    {/* Biography Hub */}
                     <div className="lg:col-span-12 xl:col-span-8">
                         <div className="bg-white/50 backdrop-blur-2xl p-12 md:p-20 rounded-[56px] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                             <h3 className="text-[11px] font-bold text-neutral-400 uppercase tracking-[0.4em] mb-10">Mission Directive</h3>
@@ -194,7 +187,6 @@ const PublicProfile: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Progress Sidebar */}
                     <div className="lg:col-span-12 xl:col-span-4">
                         <div className="bg-white p-16 rounded-[56px] border border-neutral-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] h-full flex flex-col justify-center">
                             <div className="flex justify-between items-end mb-5">
@@ -213,7 +205,6 @@ const PublicProfile: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Subject Arrays */}
                     <div className="lg:col-span-6">
                         <div className="bg-white p-12 rounded-[56px] border border-neutral-100 shadow-sm h-full">
                             <h3 className="text-[11px] font-bold text-neutral-400 uppercase tracking-[0.5em] mb-12 flex items-center gap-4">

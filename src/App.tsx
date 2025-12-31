@@ -7,7 +7,6 @@ import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary'
 import Loading from '@components/Loading/Loading'
 import Navigation from '@components/Navigation/Navigation'
 
-// Lazy load features for better performance
 const GravityMap = React.lazy(() => import('@features/GravityMap/GravityMap'))
 const Profile = React.lazy(() => import('@features/Profile/Profile'))
 const CollisionView = React.lazy(() => import('@features/CollisionView/CollisionView'))
@@ -21,7 +20,6 @@ function AppContent() {
   const { activeConversationId } = useChatStore()
   const location = useLocation()
 
-  // Check if we are in a mobile chat view
   const isMobileChat = activeConversationId && location.pathname === '/messages'
   
   return (
@@ -116,7 +114,6 @@ function App() {
   )
 }
 
-// Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user } = useAuthStore()
 
@@ -134,4 +131,3 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 }
 
 export default App
-

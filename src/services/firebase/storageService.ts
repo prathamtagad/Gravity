@@ -1,15 +1,6 @@
-/**
- * Base64 Image Storage Service
- * Converts images to Base64 strings for storage in Firestore
- * No external storage service needed - completely free!
- */
+const MAX_IMAGE_SIZE = 1024 * 1024
+const MAX_DIMENSION = 800
 
-const MAX_IMAGE_SIZE = 1024 * 1024 // 1MB limit to stay within Firestore document size
-const MAX_DIMENSION = 800 // Max width/height in pixels
-
-/**
- * Resize image to reduce file size
- */
 const resizeImage = (file: File): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -20,7 +11,6 @@ const resizeImage = (file: File): Promise<Blob> => {
         let width = img.width
         let height = img.height
 
-        // Calculate new dimensions while maintaining aspect ratio
         if (width > height) {
           if (width > MAX_DIMENSION) {
             height = (height * MAX_DIMENSION) / width
@@ -53,7 +43,7 @@ const resizeImage = (file: File): Promise<Blob> => {
             }
           },
           'image/jpeg',
-          0.85 // Quality: 85% for good balance between size and quality
+          0.85
         )
       }
       img.onerror = () => reject(new Error('Failed to load image'))
@@ -64,9 +54,6 @@ const resizeImage = (file: File): Promise<Blob> => {
   })
 }
 
-/**
- * Convert file to Base64 data URI
- */
 const fileToBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -76,26 +63,17 @@ const fileToBase64 = (file: File): Promise<string> => {
   })
 }
 
-/**
- * Upload profile image as Base64 string
- * @param userId - User ID (not used for Base64, but kept for API consistency)
- * @param file - Image file to convert
- * @returns Base64 data URI string
- */
 export const uploadProfileImage = async (
   _userId: string,
   file: File
 ): Promise<string> => {
   try {
-    // Check file size
     if (file.size > MAX_IMAGE_SIZE) {
-      // Resize if too large
       const resizedBlob = await resizeImage(file)
       const resizedFile = new File([resizedBlob], file.name, {
         type: 'image/jpeg',
       })
 
-      // Check again after resize
       if (resizedFile.size > MAX_IMAGE_SIZE) {
         throw new Error(
           `Image is too large. Maximum size is ${MAX_IMAGE_SIZE / 1024}KB`
@@ -105,7 +83,6 @@ export const uploadProfileImage = async (
       return await fileToBase64(resizedFile)
     }
 
-    // If file is small enough, just convert directly
     return await fileToBase64(file)
   } catch (error) {
     console.error('Error converting image to Base64:', error)
@@ -114,7 +91,5 @@ export const uploadProfileImage = async (
 }
 
 export const deleteProfileImage = async (_imagePath: string): Promise<void> => {
-  // No-op: Base64 images are stored in Firestore, deletion happens automatically
-  // when profile is updated with a new image or empty string
   console.log('Base64 image deletion is handled by profile updates')
 }

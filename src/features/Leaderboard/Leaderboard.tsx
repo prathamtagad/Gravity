@@ -34,12 +34,10 @@ const Leaderboard: React.FC = () => {
 
   return (
     <div className="min-h-[calc(100vh-120px)] lg:min-h-[calc(100vh-80px)] bg-neutral-50 flex flex-col animate-reveal-up overflow-x-hidden relative font-sans">
-      {/* Soft Light Aura Background */}
       <div className="fixed inset-0 z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.02),transparent_40%)]" />
       </div>
 
-      {/* Hero Header - Minimalist */}
       <div className="relative h-[250px] md:h-[350px] w-full flex flex-col items-center justify-center text-center px-6 z-10">
         <div className="relative z-10 animate-fade-in">
             <h1 className="text-4xl md:text-8xl font-bold text-neutral-900 tracking-tight mb-4 md:mb-6">
@@ -50,9 +48,7 @@ const Leaderboard: React.FC = () => {
       </div>
 
       <div className="max-w-6xl mx-auto w-full px-6 -mt-20 relative z-10 pb-40">
-        {/* Top 3 Podium - Elevated Light Cards */}
         <div className="grid md:grid-cols-3 gap-10 mb-20 items-end">
-            {/* 2nd Place */}
             {topUsers[1] && (
                 <div className="order-2 md:order-1 bg-white/60 backdrop-blur-3xl p-10 rounded-[48px] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col items-center text-center transform hover:-translate-y-2 transition-all cursor-pointer group" onClick={() => navigate(`/profile/${topUsers[1].id}`)}>
                     <div className="relative mb-8">
@@ -67,7 +63,6 @@ const Leaderboard: React.FC = () => {
                 </div>
             )}
 
-            {/* 1st Place */}
             {topUsers[0] && (
                 <div className="order-1 md:order-2 bg-white p-12 rounded-[56px] border border-neutral-100 shadow-[0_20px_60px_rgb(0,0,0,0.08)] flex flex-col items-center text-center transform hover:-translate-y-4 transition-all z-20 cursor-pointer group" onClick={() => navigate(`/profile/${topUsers[0].id}`)}>
                     <div className="relative mb-10">
@@ -83,7 +78,6 @@ const Leaderboard: React.FC = () => {
                 </div>
             )}
 
-            {/* 3rd Place */}
             {topUsers[2] && (
                 <div className="order-3 bg-white/60 backdrop-blur-3xl p-10 rounded-[48px] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col items-center text-center transform hover:-translate-y-2 transition-all cursor-pointer group" onClick={() => navigate(`/profile/${topUsers[2].id}`)}>
                     <div className="relative mb-8">
@@ -99,7 +93,6 @@ const Leaderboard: React.FC = () => {
             )}
         </div>
 
-        {/* Extended List - Minimalist Rows */}
         <div className="bg-white/40 backdrop-blur-xl rounded-[64px] border border-white shadow-[0_32px_120px_rgb(0,0,0,0.06)] overflow-hidden">
             <div className="px-12 py-10 border-b border-neutral-100 flex justify-between items-center">
                 <h2 className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">Active Entities</h2>
@@ -148,7 +141,6 @@ const Leaderboard: React.FC = () => {
             </div>
         </div>
 
-        {/* Minimal Footer Hint */}
         <div className="mt-24 flex justify-center">
             <div className="bg-white/80 backdrop-blur-3xl px-12 py-8 rounded-[40px] border border-white shadow-xl flex items-center gap-8 group">
                  <div className="w-14 h-14 bg-neutral-950 rounded-2xl flex items-center justify-center text-3xl text-white">⚛️</div>

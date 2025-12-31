@@ -9,11 +9,9 @@ interface ProfileViewProps {
 const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
   return (
     <div className="w-full animate-reveal-up font-sans">
-      {/* Aura Container */}
       <div className="max-w-7xl mx-auto w-full px-6 pt-20">
           <div className="flex flex-col items-center">
               
-              {/* Profile Header - Minimalist */}
               <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-between gap-12">
                   <div className="flex flex-col md:flex-row items-center gap-12 text-center md:text-left">
                       <div className="relative">
@@ -52,7 +50,6 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
                   </button>
               </div>
 
-              {/* Stats Hub - Elegant Typography */}
               <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-8 mt-24">
                   <div className="flex flex-col">
                       <span className="text-4xl font-bold text-neutral-900 tabular-nums">{(profile.mass || 0).toLocaleString()}</span>
@@ -72,10 +69,8 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
                   </div>
               </div>
 
-              {/* Information Grid - Clean Separation */}
               <div className="w-full grid lg:grid-cols-12 gap-12 mt-24">
                   
-                  {/* Bio Area */}
                   <div className="lg:col-span-12 xl:col-span-8">
                       <div className="bg-white/40 backdrop-blur-xl p-12 md:p-16 rounded-[48px] border border-white shadow-sm">
                           <h3 className="text-[11px] font-bold text-neutral-400 uppercase tracking-[0.3em] mb-8">Biography</h3>
@@ -85,7 +80,6 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
                       </div>
                   </div>
 
-                  {/* Level Progress - Miniature */}
                   <div className="lg:col-span-12 xl:col-span-4">
                       <div className="bg-white p-12 rounded-[48px] border border-neutral-100 shadow-sm flex flex-col justify-center h-full">
                           <div className="flex justify-between items-end mb-4">
@@ -104,7 +98,6 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
                       </div>
                   </div>
 
-                  {/* Skills Section */}
                   <div className="lg:col-span-6">
                       <div className="bg-white p-12 rounded-[48px] border border-neutral-100 shadow-sm h-full">
                           <h3 className="text-[11px] font-bold text-neutral-400 uppercase tracking-[0.3em] mb-10 flex items-center gap-2">

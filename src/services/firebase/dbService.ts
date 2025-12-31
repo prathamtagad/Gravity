@@ -16,10 +16,8 @@ import type { UserProfile, Collision, OrbitStatus, UserLocation } from '@/types/
 
 const USERS_COLLECTION = 'users'
 const COLLISIONS_COLLECTION = 'collisions'
-// const SESSIONS_COLLECTION = 'sessions' // Removed unused collection
 const FOLLOWS_COLLECTION = 'follows'
 
-// User Profile Operations
 export const createUserProfile = async (userId: string, profile: Partial<UserProfile>) => {
   const userRef = doc(db, USERS_COLLECTION, userId)
   await setDoc(userRef, {
@@ -72,7 +70,6 @@ export const updateOrbitStatus = async (userId: string, status: OrbitStatus) => 
   })
 }
 
-// Real-time listeners
 export const subscribeToUserProfile = (
   userId: string,
   callback: (profile: UserProfile | null) => void
@@ -108,7 +105,6 @@ export const subscribeToAllUsers = (
       const data = doc.data()
       const updatedAt = data.updatedAt?.toMillis() || 0
       
-      // Filter out users who haven't updated location/status in 10 mins
       if (updatedAt > tenMinutesAgo) {
         users.push({
           ...data,
@@ -124,7 +120,6 @@ export const subscribeToAllUsers = (
   })
 }
 
-// Collision Operations
 export const createCollision = async (collision: Omit<Collision, 'id'>) => {
   const collisionsRef = collection(db, COLLISIONS_COLLECTION)
   const docRef = doc(collisionsRef)
@@ -167,7 +162,6 @@ export const subscribeToUserCollisions = (
   let collisions2: Collision[] = []
 
   const updateCollisions = () => {
-    // Merge and deduplicate by ID
     const all = [...collisions1, ...collisions2]
     const unique = Array.from(new Map(all.map(item => [item.id, item])).values())
     callback(unique)
@@ -233,11 +227,9 @@ export const updateCollisionUserStatus = async (
     return
   }
 
-  // console.log('Updating collision status:', collisionId, updates)
   await updateDoc(collisionRef, updates)
 }
 
-// Session Operations
 const SESSIONS_COLLECTION = 'sessions'
 
 export const createStudySession = async (session: any) => {
@@ -252,12 +244,10 @@ export const updateStudySession = async (sessionId: string, updates: any) => {
   await updateDoc(sessionRef, updates)
 }
 
-// Social / Follow Operations
 export const followUser = async (followerId: string, followingId: string) => {
   const followId = `${followerId}_${followingId}`
   const followRef = doc(db, FOLLOWS_COLLECTION, followId)
   
-  // Create follow doc
   await setDoc(followRef, {
     id: followId,
     followerId,
@@ -265,7 +255,6 @@ export const followUser = async (followerId: string, followingId: string) => {
     createdAt: serverTimestamp()
   })
 
-  // Update counts atomically
   const followerRef = doc(db, USERS_COLLECTION, followerId)
   const followingRef = doc(db, USERS_COLLECTION, followingId)
 
@@ -277,7 +266,6 @@ export const followUser = async (followerId: string, followingId: string) => {
     followersCount: increment(1)
   })
 
-  // Award mass to the follower for networking
   await updateDoc(followerRef, {
     mass: increment(10)
   })
@@ -289,7 +277,6 @@ export const unfollowUser = async (followerId: string, followingId: string) => {
   
   await deleteDoc(followRef)
 
-  // Update counts atomically
   const followerRef = doc(db, USERS_COLLECTION, followerId)
   const followingRef = doc(db, USERS_COLLECTION, followingId)
 
@@ -308,5 +295,3 @@ export const isFollowing = async (followerId: string, followingId: string): Prom
   const snap = await getDoc(followRef)
   return snap.exists()
 }
-
-

@@ -29,11 +29,9 @@ const ChatPage: React.FC = () => {
   const [showXp, setShowXp] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  // Pre-fill icebreaker if present
   useEffect(() => {
      if (suggestedMessage) {
          setInputText(suggestedMessage)
-         // Clear it so it doesn't pop up again if user navigates back and forth
          setSuggestedMessage(null)
      }
   }, [suggestedMessage, setSuggestedMessage])
@@ -64,7 +62,6 @@ const ChatPage: React.FC = () => {
       await sendMessage(inputText, user.uid)
       setInputText('')
       
-      // Celebratory XP Animation
       setShowXp(true)
       setTimeout(() => setShowXp(false), 2000)
 
@@ -96,7 +93,6 @@ const ChatPage: React.FC = () => {
   return (
     <div className="h-[calc(100vh-80px)] md:h-[calc(100vh-80px)] bg-white md:bg-neutral-50 flex flex-col font-sans overflow-hidden"> 
       <div className="flex-1 flex items-stretch min-h-0 bg-white md:m-4 md:rounded-[40px] md:shadow-[0_8px_40px_rgb(0,0,0,0.04)] md:border md:border-neutral-100 overflow-hidden">
-          {/* Sidebar (Hidden on Mobile if Chat Open) */}
           <div className={`
             w-full md:w-[400px] flex flex-col border-r border-neutral-100 bg-white md:bg-neutral-50/30
             ${showChat ? 'hidden md:flex' : 'flex'}
@@ -157,7 +153,6 @@ const ChatPage: React.FC = () => {
                                 <div className="flex-1 min-w-0">
                                     <div className="flex justify-between items-baseline mb-0.5">
                                         <h3 className={`font-semibold text-[15px] truncate ${isActive ? 'text-neutral-900' : 'text-neutral-900'}`}>{partner.displayName}</h3>
-                                        {/* <span className="text-[10px] font-medium text-neutral-400">{conv.updatedAt ? new Date(conv.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span> */}
                                     </div>
                                     <p className={`text-sm truncate ${conv.lastMessage?.senderId !== user.uid && !conv.lastMessage?.read ? 'text-neutral-900 font-bold' : 'text-neutral-500 font-normal'}`}>
                                         {conv.lastMessage?.text || 'Sent an image'}
@@ -170,7 +165,6 @@ const ChatPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Main Chat Area - Instagram Style */}
           <div className={`
             flex-1 flex flex-col bg-white relative
             ${showChat ? 'fixed inset-0 z-[2000] w-full h-[100dvh] overscroll-none' : 'hidden md:flex h-full'}
@@ -185,7 +179,6 @@ const ChatPage: React.FC = () => {
                   </div>
               ) : (
                  <>
-                    {/* IG Header - Fixed Height & No Shrink */}
                     <div className="h-[60px] px-4 md:px-6 flex items-center border-b border-neutral-100 bg-white sticky top-0 z-30 shrink-0">
                         <button 
                           onClick={() => openInbox()}
@@ -217,7 +210,6 @@ const ChatPage: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Chat Area - Flex Grow & Scrollable */}
                     <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 bg-white scroll-smooth custom-scrollbar min-h-0">
                         {messages.length === 0 && (
                             <div className="flex flex-col items-center justify-center pt-20 pb-10 grayscale opacity-50">
@@ -253,7 +245,7 @@ const ChatPage: React.FC = () => {
                                         {!isMe && !isSequenceBottom && (
                                              <img src={activeRecipient?.photoURL} className="w-7 h-7 rounded-full object-cover mr-2 self-end mb-1" />
                                         )}
-                                        {!isMe && isSequenceBottom && <div className="w-9" />} {/* Spacer for alignment */}
+                                        {!isMe && isSequenceBottom && <div className="w-9" />}
 
                                         <div className={`
                                             max-w-[70%] px-4 py-2.5 text-[15px] leading-relaxed break-words
@@ -275,7 +267,6 @@ const ChatPage: React.FC = () => {
                         <div ref={messagesEndRef} />
                     </div>
 
-                    {/* Input Area - Pill Style - No Shrink */}
                     <div className="p-3 md:p-4 bg-white shrink-0 pb-safe">
                         <div className="flex items-center gap-2 bg-neutral-100 rounded-[26px] p-1.5 pl-4 transition-all focus-within:ring-2 focus-within:ring-neutral-900/5">
                             <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shrink-0 cursor-pointer">
@@ -316,7 +307,6 @@ const ChatPage: React.FC = () => {
           </div>
       </div>
 
-      {/* XP Pop-up Animation */}
       {showXp && (
         <div className="fixed inset-0 pointer-events-none z-[3000] flex items-center justify-center">
             <div className="bg-neutral-900/90 backdrop-blur-md text-white px-6 py-3 rounded-full shadow-2xl animate-float-up flex items-center gap-3 border border-white/10">

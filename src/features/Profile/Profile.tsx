@@ -22,7 +22,6 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     if (user && !profile && !loading) {
-      // Create initial profile if it doesn't exist
       createUserProfile(user.uid, {
         id: user.uid,
         email: user.email || '',
@@ -47,7 +46,6 @@ const Profile: React.FC = () => {
 
   return (
     <div className="min-h-[calc(100vh-120px)] lg:min-h-[calc(100vh-80px)] bg-neutral-50 flex flex-col animate-reveal-up overflow-x-hidden relative font-sans">
-      {/* Soft Aura Gradient Layer */}
       <div className="fixed inset-0 z-0">
          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.03),transparent_40%)]" />
          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.03),transparent_40%)]" />
@@ -71,7 +69,6 @@ const Profile: React.FC = () => {
               onEdit={() => setIsEditing(true)}
             />
             
-            {/* Cosmic Quests - Gamification Module */}
             <div className="max-w-7xl mx-auto w-full px-6 mt-16">
                <div className="bg-white p-12 rounded-[56px] border border-neutral-100 shadow-sm overflow-hidden relative group">
                   <div className="absolute top-0 right-0 p-12 opacity-5 scale-150 rotate-12 group-hover:scale-175 transition-transform duration-1000">🚀</div>
@@ -113,7 +110,6 @@ const Profile: React.FC = () => {
                </div>
             </div>
 
-            {/* System Settings Footer */}
             <div className="max-w-7xl mx-auto w-full px-6 pb-20 mt-16">
                <div className="bg-white/40 backdrop-blur-xl p-8 md:p-12 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 border border-white shadow-sm">
                   <div className="flex items-center gap-6">
@@ -145,4 +141,3 @@ const Profile: React.FC = () => {
 }
 
 export default Profile
-

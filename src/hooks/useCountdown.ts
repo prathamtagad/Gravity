@@ -11,7 +11,7 @@ export const useCountdown = ({
   onComplete,
   autoStart = true,
 }: UseCountdownOptions) => {
-  const [timeLeft, setTimeLeft] = useState(initialMinutes * 60) // Convert to seconds
+  const [timeLeft, setTimeLeft] = useState(initialMinutes * 60)
   const [isRunning, setIsRunning] = useState(autoStart)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -64,4 +64,3 @@ export const useCountdown = ({
     reset,
   }
 }
-

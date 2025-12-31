@@ -14,7 +14,6 @@
 }
 
 @layer components {
-  /* Glassmorphism Utilities */
   .glass-panel {
     @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
   }
@@ -23,12 +22,10 @@
     @apply bg-gravity-dark/80 backdrop-blur-xl border border-white/10 shadow-2xl text-white;
   }
 
-  /* Gradient Text */
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-gravity-primary via-purple-500 to-gravity-accent;
   }
 
-  /* Modern Buttons */
   .btn-primary {
     @apply bg-gradient-to-r from-gravity-primary to-purple-600 text-white px-5 py-2.5 rounded-xl font-semibold 
     shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-95 
@@ -40,12 +37,10 @@
     hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 active:scale-95;
   }
 
-  /* Cards */
   .card {
     @apply glass-panel rounded-2xl p-6 transition-transform hover:scale-[1.01] duration-300;
   }
 
-  /* Inputs */
   .input-modern {
     @apply w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:bg-white 
     focus:ring-2 focus:ring-gravity-primary/50 focus:border-gravity-primary transition-all duration-200 outline-none;
@@ -132,12 +127,10 @@
     animation: pulseSubtle 3s ease-in-out infinite;
   }
 
-  /* Transition Durations */
   .transition-premium {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Custom Scrollbar */
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
@@ -152,7 +145,6 @@
     background-color: rgba(156, 163, 175, 0.5);
   }
 
-  /* Hide scrollbar but keep functionality */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -161,7 +153,6 @@
     scrollbar-width: none;
   }
 
-  /* Leaflet custom overrides */
   .leaflet-popup-content-wrapper, .leaflet-popup-tip {
     background: rgba(255, 255, 255, 0.85) !important;
     backdrop-filter: blur(16px) !important;
@@ -178,7 +169,6 @@
     font-family: 'Inter', sans-serif !important;
   }
 
-  /* Aura Heat Zone Glow Effect */
   .aura-heat-zone {
     filter: blur(12px);
     opacity: 0.6;

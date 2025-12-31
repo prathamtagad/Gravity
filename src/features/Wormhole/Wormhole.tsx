@@ -43,7 +43,6 @@ const Wormhole: React.FC = () => {
           <p className="text-gray-500 mt-1">Active jumps and stable connections</p>
         </header>
 
-        {/* Active Study Session */}
         {activeSession && (
           <div className="bg-indigo-600 rounded-2xl p-6 text-white shadow-lg transform hover:scale-[1.02] transition-transform">
             <div className="flex justify-between items-start mb-4">
@@ -64,7 +63,6 @@ const Wormhole: React.FC = () => {
           </div>
         )}
 
-        {/* Active Collisions / Matches */}
         <section>
           <h2 className="text-lg font-bold text-gray-700 mb-4 flex items-center gap-2">
             <span>⚡</span> Detected Collisions

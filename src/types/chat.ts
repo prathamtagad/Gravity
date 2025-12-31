@@ -8,7 +8,7 @@ export interface Message {
 
 export interface Conversation {
   id: string
-  participants: string[] // [uid1, uid2]
+  participants: string[]
   participantProfiles?: {
     [uid: string]: {
         displayName: string

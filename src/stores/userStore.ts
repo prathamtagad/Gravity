@@ -17,7 +17,6 @@ export const useUserStore = create<UserState>((set) => ({
   loading: false,
   setProfile: (profile) => set({ profile }),
   updateProfile: async (userId, updates) => {
-    // If mass is updated, recalculate level & rank
     const newMass = updates.mass ?? useUserStore.getState().profile?.mass ?? 0
     const levelInfo = calculateLevelInfo(newMass)
     const enhancedUpdates = {
@@ -48,4 +47,3 @@ export const useUserStore = create<UserState>((set) => ({
     }
   },
 }))
-
