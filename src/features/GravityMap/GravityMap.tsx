@@ -15,6 +15,8 @@ import { calculateGravityPull } from '@services/matching/gravityEngine'
 import { getZoneStatus } from '@services/map/heatZoneService'
 import LiveActivityTicker from '@components/Map/LiveActivityTicker'
 import GapNavigator from '@features/GapNavigator/GapNavigator'
+import TimetableInput from '@features/Timetable/TimetableInput'
+import { getCampusHotspots } from '@services/map/campusHotspots'
 import type { UserProfile, UserLocation } from '@/types/user'
 
 const clusterMarkers = (users: UserProfile[], zoom: number) => {
@@ -205,6 +207,32 @@ const GravityMap: React.FC = () => {
   }
 
   const [showGapNavigator, setShowGapNavigator] = useState(false)
+  const [showTimetable, setShowTimetable] = useState(false)
+  const [showHotspots] = useState(true)
+
+  const campusHotspots = profile?.location 
+    ? getCampusHotspots(profile.location.latitude, profile.location.longitude)
+    : []
+
+  const createHotspotIcon = (icon: string) => {
+    return new DivIcon({
+      html: `<div style="
+        width: 44px;
+        height: 44px;
+        border-radius: 16px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        border: 3px solid #e5e5e5;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      ">${icon}</div>`,
+      iconSize: [44, 44],
+      iconAnchor: [22, 44],
+      className: 'campus-hotspot-marker',
+    })
+  }
 
   // ... (previous useEffects)
 
@@ -282,6 +310,33 @@ const GravityMap: React.FC = () => {
             </Circle>
           )
         })}
+
+        {showHotspots && campusHotspots.map((hotspot) => (
+          <Marker
+            key={hotspot.id}
+            position={[hotspot.latitude, hotspot.longitude]}
+            icon={createHotspotIcon(hotspot.icon)}
+          >
+            <Popup>
+              <div className="p-4 w-56">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl">{hotspot.icon}</span>
+                  <h3 className="font-bold text-neutral-900 text-lg leading-tight">{hotspot.name}</h3>
+                </div>
+                <p className="text-sm text-neutral-500 mb-4">{hotspot.description}</p>
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Best For</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {hotspot.bestFor.map((tag, i) => (
+                      <span key={i} className="px-2 py-1 bg-neutral-100 text-neutral-600 text-xs font-medium rounded-lg">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+
 
         {!isHeatMapMode && clusteredMarkers.map((item, index) => {
           if (!item.user.location || item.user.id === profile?.id) return null
@@ -419,6 +474,14 @@ const GravityMap: React.FC = () => {
            <span className="text-lg">⚡</span>
            <span>Gap Navigator</span>
         </button>
+
+        <button
+          onClick={() => setShowTimetable(true)}
+          className="group flex items-center gap-3 px-6 py-3.5 rounded-3xl font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95 bg-white text-neutral-900 border-white hover:bg-neutral-50"
+        >
+           <span className="text-lg">📅</span>
+           <span>My Schedule</span>
+        </button>
       </div>
 
       <OrbitStatus
@@ -432,6 +495,8 @@ const GravityMap: React.FC = () => {
       <BlackHoleTimer />
 
       {showGapNavigator && <GapNavigator onClose={() => setShowGapNavigator(false)} />}
+
+      {showTimetable && <TimetableInput onClose={() => setShowTimetable(false)} />}
 
       {locationError && (
         <div className="fixed top-24 left-6 right-6 md:left-auto md:right-8 md:w-80 bg-white border border-red-100 rounded-3xl p-5 z-[1000] shadow-xl animate-reveal-up">

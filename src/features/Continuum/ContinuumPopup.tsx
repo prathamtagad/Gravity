@@ -1,11 +1,9 @@
 
 import React from 'react'
 import { useUserStore } from '@stores/userStore'
-import { useNavigate } from 'react-router-dom'
 
 const ContinuumPopup: React.FC = () => {
   const { activeQuest } = useUserStore()
-  const navigate = useNavigate()
 
   if (!activeQuest) return null
 

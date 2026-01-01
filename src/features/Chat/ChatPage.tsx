@@ -89,7 +89,7 @@ const ChatPage: React.FC = () => {
 
   const filteredConversations = conversations.filter(conv => {
       if (!searchQuery.trim()) return true
-      const otherId = conv.participants.find(id => id !== user.uid) || ''
+      const otherId = conv.participants.find(id => id !== user!.uid) || ''
       const partner = conv.participantProfiles?.[otherId]
       return partner?.displayName?.toLowerCase().includes(searchQuery.toLowerCase())
   })

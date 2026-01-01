@@ -1,22 +1,34 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { generateGapActivities, QuestActivity } from '@services/ai/geminiService'
 import { useUserStore } from '@stores/userStore'
+import { useTimetableStore } from '@stores/timetableStore'
 
 interface GapNavigatorProps {
   onClose: () => void
 }
 
 const GapNavigator: React.FC<GapNavigatorProps> = ({ onClose }) => {
+  const { detectedGaps, getCurrentGap, currentGap } = useTimetableStore()
   const [time, setTime] = useState(30)
   const [loading, setLoading] = useState(false)
   const [quests, setQuests] = useState<QuestActivity[]>([])
-  const { setActiveQuest, updateStatus, updateProfile, profile } = useUserStore()
+  const { setActiveQuest, updateProfile, profile } = useUserStore()
+
+  useEffect(() => {
+    const gap = getCurrentGap()
+    if (gap) {
+      setTime(Math.min(gap.durationMinutes, 120))
+    } else if (detectedGaps.length > 0) {
+      setTime(Math.min(detectedGaps[0].durationMinutes, 120))
+    }
+  }, [detectedGaps, getCurrentGap])
 
   const handleOptimize = async () => {
     setLoading(true)
     try {
-      const results = await generateGapActivities(time)
+      const subjects = profile?.subjects || []
+      const results = await generateGapActivities(time, subjects)
       setQuests(results)
     } finally {
       setLoading(false)
@@ -51,6 +63,28 @@ const GapNavigator: React.FC<GapNavigatorProps> = ({ onClose }) => {
           <h2 className="text-2xl font-bold text-neutral-900">Gap Navigator</h2>
           <p className="text-neutral-500 text-sm mt-1">Transform downtime into progress</p>
         </div>
+
+        {currentGap && (
+          <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-100">
+            <div className="flex items-center gap-2">
+              <span className="text-lg">⚡</span>
+              <span className="text-sm font-bold text-green-700">
+                You're in a {currentGap.durationMinutes}min gap right now!
+              </span>
+            </div>
+            <p className="text-xs text-green-600 mt-1">
+              {currentGap.day} {currentGap.startTime} - {currentGap.endTime}
+            </p>
+          </div>
+        )}
+
+        {detectedGaps.length > 0 && !currentGap && (
+          <div className="mb-6 p-3 bg-neutral-50 rounded-xl border border-neutral-100">
+            <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
+              {detectedGaps.length} gaps in your schedule
+            </span>
+          </div>
+        )}
 
         {quests.length === 0 ? (
           <div className="space-y-8 py-4">

@@ -162,15 +162,27 @@ GENERATED_QUESTS.forEach(q => {
 
 export const MOCK_QUESTS = GENERATED_QUESTS
 
-export const getRandomMockQuests = (minutes: number, count: number = 3): QuestActivity[] => {
-    // Filter by duration (allow slightly shorter quests)
+export const getRandomMockQuests = (minutes: number, subjects: string[] = [], count: number = 3): QuestActivity[] => {
     const candidates = MOCK_QUESTS.filter(q => q.duration <= minutes)
     
-    // Shuffle
-    for (let i = candidates.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+    let prioritized: QuestActivity[] = []
+    if (subjects.length > 0) {
+        const subjectLower = subjects.map(s => s.toLowerCase())
+        prioritized = candidates.filter(q => 
+            subjectLower.some(subj => 
+                q.title.toLowerCase().includes(subj) || 
+                q.description.toLowerCase().includes(subj)
+            )
+        )
     }
     
-    return candidates.slice(0, count)
+    const remaining = candidates.filter(q => !prioritized.includes(q))
+    
+    for (let i = remaining.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+    }
+    
+    const result = [...prioritized.slice(0, Math.min(1, prioritized.length)), ...remaining]
+    return result.slice(0, count)
 }
