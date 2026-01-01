@@ -60,10 +60,10 @@ Built for **Hack'Vento 2026** by GDG on Campus IET DAVV
 
 | Name | Role |
 |------|------|
-| Pratham | **Lead Software Engineer** (Full Stack) |
-| [Member 2] | **AI & Data Specialist** (Gemini Integration) |
-| [Member 3] | **Product Designer** (UI/UX & Frontend) |
-| [Member 4] | **Cloud Engineer** (Firebase & Maps) |
+| Pratham | Lead Developer |
+| [Team Member 2] | [Role] |
+| [Team Member 3] | [Role] |
+| [Team Member 4] | [Role] |
 
 ---
 
