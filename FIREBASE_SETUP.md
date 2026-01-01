@@ -71,7 +71,3 @@ If you encounter issues:
    - Check OAuth consent screen in Google Cloud Console
 
 ---
-
-**Setup Date**: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
-**Status**: ✅ Ready to use
-
