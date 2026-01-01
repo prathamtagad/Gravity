@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { TimeSlot, DetectedGap, Timetable } from '@/types/timetable'
 import { DAYS } from '@/types/timetable'
+import { DEMO_TIMETABLE } from '@/services/demo/demoData'
 
 interface TimetableState {
   timetable: Timetable
@@ -13,6 +14,8 @@ interface TimetableState {
   detectGaps: () => void
   getCurrentGap: () => DetectedGap | null
   clearTimetable: () => void
+  loadDemoTimetable: () => void
+  importFromCSV: (csvContent: string) => { success: boolean; count: number; error?: string }
 }
 
 const timeToMinutes = (time: string): number => {
@@ -117,6 +120,60 @@ export const useTimetableStore = create<TimetableState>()(
 
       clearTimetable: () => {
         set({ timetable: [], detectedGaps: [], currentGap: null })
+      },
+
+      loadDemoTimetable: () => {
+        const demoSlots: TimeSlot[] = DEMO_TIMETABLE.map((slot, index) => ({
+          ...slot,
+          id: `demo-class-${index}`
+        }))
+        set({ timetable: demoSlots })
+        get().detectGaps()
+      },
+
+      importFromCSV: (csvContent: string) => {
+        try {
+          const lines = csvContent.split('\n')
+          const newSlots: TimeSlot[] = []
+          let successCount = 0
+
+          const startIndex = lines[0].toLowerCase().includes('day') ? 1 : 0
+
+          const validDays: TimeSlot['day'][] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+          for (let i = startIndex; i < lines.length; i++) {
+            const line = lines[i].trim()
+            if (!line) continue
+
+            const [dayStr, startTime, endTime, className] = line.split(',').map(s => s.trim())
+            
+            const day = validDays.find(d => d.toLowerCase() === dayStr.toLowerCase()) as TimeSlot['day']
+
+            if (day && startTime && endTime && className) {
+               newSlots.push({
+                 id: `import-${Date.now()}-${i}`,
+                 day,
+                 startTime,
+                 endTime,
+                 className
+               })
+               successCount++
+            }
+          }
+
+          if (successCount > 0) {
+            set((state) => ({
+              timetable: [...state.timetable, ...newSlots]
+            }))
+            get().detectGaps()
+            return { success: true, count: successCount }
+          }
+          
+          return { success: false, count: 0, error: 'No valid classes found in CSV' }
+        } catch (e) {
+          console.error('CSV Import Error:', e)
+          return { success: false, count: 0, error: 'Failed to parse CSV file' }
+        }
       }
     }),
     {

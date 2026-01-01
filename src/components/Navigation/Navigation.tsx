@@ -2,13 +2,33 @@ import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useUserStore } from '@stores/userStore'
 import { useChatStore } from '@stores/chatStore'
+import { useDemoStore } from '@stores/demoStore'
+import { useTimetableStore } from '@stores/timetableStore'
+import { useMapStore } from '@stores/mapStore'
+import { useImpactStore } from '@stores/impactStore'
 import { signOut } from '@services/firebase/authService'
 
 const Navigation: React.FC = () => {
   const { profile } = useUserStore()
   const { activeConversationId } = useChatStore()
+  const { isDemoMode, toggleDemoMode } = useDemoStore()
+  const { loadDemoTimetable, clearTimetable } = useTimetableStore()
+  const { loadDemoUsers, clearDemoUsers } = useMapStore()
+  const { loadDemoStats } = useImpactStore()
   const location = useLocation()
   const navigate = useNavigate()
+
+  const handleDemoToggle = () => {
+    if (!isDemoMode) {
+      loadDemoTimetable()
+      loadDemoUsers()
+      loadDemoStats()
+    } else {
+      clearTimetable()
+      clearDemoUsers()
+    }
+    toggleDemoMode()
+  }
 
   const handleSignOut = async () => {
     try {
@@ -102,6 +122,17 @@ const Navigation: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-6">
+            <button
+              onClick={handleDemoToggle}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${
+                isDemoMode
+                  ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg'
+                  : 'bg-neutral-100 text-neutral-500 hover:bg-neutral-200'
+              }`}
+            >
+              <span>{isDemoMode ? '✨' : '🎭'}</span>
+              <span>{isDemoMode ? 'Demo Active' : 'Demo Mode'}</span>
+            </button>
             <div className="flex flex-col items-end">
                 <span className="text-sm font-bold text-neutral-900">{profile?.displayName}</span>
                 <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-[0.2em] mt-1">XP {profile?.mass || 0}</span>
@@ -123,11 +154,17 @@ const Navigation: React.FC = () => {
             <span className="text-lg font-black text-neutral-900 tracking-tighter">Gravity</span>
             </div>
             
-            <div className="flex items-center gap-4">
-            <button onClick={() => navigate('/booster')} className="p-2 text-neutral-800">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <div className="flex items-center gap-2">
+            <button
+              onClick={handleDemoToggle}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest transition-all ${
+                isDemoMode
+                  ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg'
+                  : 'bg-neutral-100 text-neutral-400'
+              }`}
+            >
+              <span>{isDemoMode ? '✨' : '🎭'}</span>
+              <span>{isDemoMode ? 'Demo' : 'Demo'}</span>
             </button>
             <button onClick={() => navigate('/messages')} className="p-2 text-neutral-800 relative">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>

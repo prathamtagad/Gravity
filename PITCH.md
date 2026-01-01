@@ -58,6 +58,13 @@ Students waste **2+ hours daily** in unplanned gaps between classes. When lectur
 
 Built for **Hack'Vento 2026** by GDG on Campus IET DAVV
 
+| Name | Role |
+|------|------|
+| Pratham | Lead Developer |
+| [Team Member 2] | [Role] |
+| [Team Member 3] | [Role] |
+| [Team Member 4] | [Role] |
+
 ---
 
 *"Your gaps, our gravity. Pull yourself towards progress."*

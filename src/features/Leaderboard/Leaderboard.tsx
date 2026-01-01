@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore'
 import { db } from '@services/firebase/config'
 import type { UserProfile } from '@/types/user'
+import { useDemoStore } from '@stores/demoStore'
+import { DEMO_USERS } from '@services/demo/demoData'
 import Loading from '@components/Loading/Loading'
 import EmptyState from '@components/EmptyState/EmptyState'
 
@@ -10,8 +12,18 @@ const Leaderboard: React.FC = () => {
   const [topUsers, setTopUsers] = useState<UserProfile[]>([])
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
+  const { isDemoMode } = useDemoStore()
 
   useEffect(() => {
+    if (isDemoMode) {
+      const demoUsersSorted = [...DEMO_USERS]
+        .sort((a, b) => (b.mass || 0) - (a.mass || 0))
+        .slice(0, 10) as UserProfile[]
+      setTopUsers(demoUsersSorted)
+      setLoading(false)
+      return
+    }
+
     const usersRef = collection(db, 'users')
     const q = query(usersRef, orderBy('mass', 'desc'), limit(10))
 
@@ -28,7 +40,7 @@ const Leaderboard: React.FC = () => {
     })
 
     return () => unsubscribe()
-  }, [])
+  }, [isDemoMode])
 
   if (loading) return <Loading fullScreen message="Reading data..." />
 

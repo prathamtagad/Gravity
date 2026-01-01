@@ -155,6 +155,21 @@ Coordinates: `22.6811°N, 75.8800°E`
 
 Built for **Hack'Vento 2026** by GDG on Campus IET DAVV
 
+| Name | Role | GitHub |
+|------|------|--------|
+| Pratham | Full Stack Developer | [@pratham](https://github.com/pratham) |
+| [Team Member 2] | [Role] | [@username](https://github.com/username) |
+| [Team Member 3] | [Role] | [@username](https://github.com/username) |
+| [Team Member 4] | [Role] | [@username](https://github.com/username) |
+
+---
+
+## 🌐 Live Demo
+
+- **Web App**: [gravity-study.vercel.app](https://gravity-study.vercel.app) *(Update after deployment)*
+- **Demo Video**: [YouTube Link](https://youtube.com/watch?v=xxxxx) *(Add after recording)*
+- **APK Download**: [Releases](https://github.com/username/gravity-study/releases)
+
 ---
 
 ## 📄 License

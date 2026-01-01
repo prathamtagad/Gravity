@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthStore } from '@stores/authStore'
 import { useUserStore } from '@stores/userStore'
+import { useImpactStore } from '@stores/impactStore'
+import { useDemoStore } from '@stores/demoStore'
 import { createUserProfile } from '@services/firebase/dbService'
 import ProfileForm from './ProfileForm'
 import ProfileView from './ProfileView'
@@ -9,8 +11,16 @@ import Loading from '@components/Loading/Loading'
 const Profile: React.FC = () => {
   const { user } = useAuthStore()
   const { profile, loadProfile } = useUserStore()
+  const { stats, loadDemoStats } = useImpactStore()
+  const { isDemoMode } = useDemoStore()
   const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (isDemoMode) {
+      loadDemoStats()
+    }
+  }, [isDemoMode, loadDemoStats])
 
   useEffect(() => {
     if (user) {
@@ -68,6 +78,63 @@ const Profile: React.FC = () => {
               profile={profile}
               onEdit={() => setIsEditing(true)}
             />
+            
+            {/* Impact Metrics Dashboard */}
+            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 mt-8 sm:mt-12">
+               <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-0.5 sm:p-1 rounded-[24px] sm:rounded-[48px] shadow-2xl">
+                 <div className="bg-white p-4 sm:p-8 md:p-10 rounded-[22px] sm:rounded-[44px] overflow-hidden relative">
+                   <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-8">
+                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-base sm:text-xl shadow-lg">📊</div>
+                     <div className="flex-1 min-w-0">
+                       <h3 className="text-base sm:text-xl font-bold text-neutral-900 tracking-tight">Your Impact</h3>
+                       <p className="text-[10px] sm:text-xs text-neutral-400 font-medium">Powered by Gravity Study</p>
+                     </div>
+                     {isDemoMode && (
+                       <span className="px-2 sm:px-3 py-1 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-[8px] sm:text-[9px] font-bold uppercase tracking-widest rounded-full">Demo</span>
+                     )}
+                   </div>
+                   
+                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
+                     <div className="p-3 sm:p-5 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl sm:rounded-3xl border border-green-100">
+                       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 tabular-nums">{stats.hoursThisWeek}h</div>
+                       <div className="text-[8px] sm:text-[10px] font-bold text-green-500 uppercase tracking-widest mt-1">Saved This Week</div>
+                     </div>
+                     <div className="p-3 sm:p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl sm:rounded-3xl border border-blue-100">
+                       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 tabular-nums">{stats.questsCompleted}</div>
+                       <div className="text-[8px] sm:text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-1">Quests Done</div>
+                     </div>
+                     <div className="p-3 sm:p-5 bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl sm:rounded-3xl border border-orange-100">
+                       <div className="flex items-baseline gap-1">
+                         <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-600 tabular-nums">{stats.currentStreak}</span>
+                         <span className="text-sm sm:text-lg">🔥</span>
+                       </div>
+                       <div className="text-[8px] sm:text-[10px] font-bold text-orange-500 uppercase tracking-widest mt-1">Day Streak</div>
+                     </div>
+                     <div className="p-3 sm:p-5 bg-gradient-to-br from-purple-50 to-fuchsia-50 rounded-2xl sm:rounded-3xl border border-purple-100">
+                       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-600 tabular-nums">{stats.gapsOptimized}</div>
+                       <div className="text-[8px] sm:text-[10px] font-bold text-purple-500 uppercase tracking-widest mt-1">Gaps Optimized</div>
+                     </div>
+                   </div>
+
+                   <div className="mt-6 pt-6 border-t border-neutral-100">
+                     <div className="grid grid-cols-3 gap-4 text-center">
+                       <div>
+                         <div className="text-xl font-bold text-neutral-900 tabular-nums">{stats.totalHoursSaved}h</div>
+                         <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">Total Saved</div>
+                       </div>
+                       <div>
+                         <div className="text-xl font-bold text-neutral-900 tabular-nums">{stats.totalQuestsCompleted}</div>
+                         <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">All Quests</div>
+                       </div>
+                       <div>
+                         <div className="text-xl font-bold text-neutral-900 tabular-nums">{stats.studyBuddiesConnected}</div>
+                         <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">Study Buddies</div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+            </div>
             
             <div className="max-w-7xl mx-auto w-full px-6 mt-16">
                <div className="bg-white p-12 rounded-[56px] border border-neutral-100 shadow-sm overflow-hidden relative group">

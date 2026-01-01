@@ -1,0 +1,178 @@
+import type { TimeSlot } from '@/types/timetable'
+import type { UserProfile } from '@/types/user'
+
+export const DEMO_TIMETABLE: Omit<TimeSlot, 'id'>[] = [
+  { day: 'Monday', startTime: '09:00', endTime: '10:30', className: 'Data Structures & Algorithms', location: 'CS Lab Block' },
+  { day: 'Monday', startTime: '11:30', endTime: '13:00', className: 'Database Management', location: 'Room 201' },
+  { day: 'Monday', startTime: '14:00', endTime: '15:30', className: 'Web Development', location: 'CS Lab Block' },
+  
+  { day: 'Tuesday', startTime: '08:30', endTime: '10:00', className: 'Operating Systems', location: 'Room 102' },
+  { day: 'Tuesday', startTime: '11:00', endTime: '12:30', className: 'Computer Networks', location: 'Room 203' },
+  { day: 'Tuesday', startTime: '14:30', endTime: '16:00', className: 'Software Engineering', location: 'Seminar Hall' },
+  
+  { day: 'Wednesday', startTime: '09:30', endTime: '11:00', className: 'Machine Learning', location: 'AI Lab' },
+  { day: 'Wednesday', startTime: '12:00', endTime: '13:30', className: 'Data Structures & Algorithms', location: 'CS Lab Block' },
+  { day: 'Wednesday', startTime: '15:00', endTime: '16:30', className: 'Cloud Computing', location: 'Room 301' },
+  
+  { day: 'Thursday', startTime: '08:00', endTime: '09:30', className: 'Theory of Computation', location: 'Room 105' },
+  { day: 'Thursday', startTime: '10:30', endTime: '12:00', className: 'Database Management', location: 'Room 201' },
+  { day: 'Thursday', startTime: '14:00', endTime: '15:30', className: 'Artificial Intelligence', location: 'AI Lab' },
+  
+  { day: 'Friday', startTime: '09:00', endTime: '10:30', className: 'Web Development', location: 'CS Lab Block' },
+  { day: 'Friday', startTime: '11:30', endTime: '13:00', className: 'Cyber Security', location: 'Room 204' },
+  { day: 'Friday', startTime: '14:30', endTime: '16:00', className: 'Project Work', location: 'Project Lab' },
+  
+  { day: 'Saturday', startTime: '09:00', endTime: '11:00', className: 'Tutorial Session', location: 'Room 101' },
+  { day: 'Saturday', startTime: '12:00', endTime: '13:30', className: 'Lab Practice', location: 'CS Lab Block' },
+]
+
+export const DEMO_USERS: Partial<UserProfile>[] = [
+  {
+    id: 'demo-user-1',
+    displayName: 'Aryan Sharma',
+    email: 'aryan@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=aryan&backgroundColor=b6e3f4',
+    bio: 'CS undergrad passionate about AI/ML 🤖',
+    subjects: ['Machine Learning', 'Python', 'Deep Learning'],
+    mass: 2450,
+    level: 12,
+    rank: 'Nebula',
+    orbitStatus: 'In Orbit',
+    location: { latitude: 22.6815, longitude: 75.8795, timestamp: Date.now() },
+    followersCount: 156,
+    followingCount: 89,
+    createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'demo-user-2',
+    displayName: 'Priya Patel',
+    email: 'priya@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=priya&backgroundColor=ffd5dc',
+    bio: 'Full-stack developer | Open source contributor',
+    subjects: ['React', 'Node.js', 'TypeScript'],
+    mass: 3120,
+    level: 15,
+    rank: 'Supernova',
+    orbitStatus: 'High Gravity',
+    location: { latitude: 22.6808, longitude: 75.8802, timestamp: Date.now() },
+    followersCount: 234,
+    followingCount: 112,
+    createdAt: Date.now() - 45 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'demo-user-3',
+    displayName: 'Rahul Verma',
+    email: 'rahul@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=rahul&backgroundColor=c0aede',
+    bio: 'DSA enthusiast | Competitive programmer',
+    subjects: ['Data Structures', 'Algorithms', 'C++'],
+    mass: 4580,
+    level: 18,
+    rank: 'Black Hole',
+    orbitStatus: 'In Orbit',
+    location: { latitude: 22.6812, longitude: 75.8798, timestamp: Date.now() },
+    followersCount: 345,
+    followingCount: 67,
+    createdAt: Date.now() - 60 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'demo-user-4',
+    displayName: 'Sneha Gupta',
+    email: 'sneha@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sneha&backgroundColor=d1d4f9',
+    bio: 'UI/UX Designer | Creative coder 🎨',
+    subjects: ['UI Design', 'Figma', 'CSS'],
+    mass: 1890,
+    level: 10,
+    rank: 'Star',
+    orbitStatus: 'In Orbit',
+    location: { latitude: 22.6818, longitude: 75.8805, timestamp: Date.now() },
+    followersCount: 189,
+    followingCount: 156,
+    createdAt: Date.now() - 25 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'demo-user-5',
+    displayName: 'Vikram Singh',
+    email: 'vikram@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=vikram&backgroundColor=ffdfbf',
+    bio: 'Cloud architect | DevOps enthusiast ☁️',
+    subjects: ['AWS', 'Docker', 'Kubernetes'],
+    mass: 2780,
+    level: 13,
+    rank: 'Nebula',
+    orbitStatus: 'Event Horizon',
+    eventHorizonEndTime: Date.now() + 25 * 60 * 1000,
+    location: { latitude: 22.6805, longitude: 75.8792, timestamp: Date.now() },
+    followersCount: 201,
+    followingCount: 98,
+    createdAt: Date.now() - 40 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'demo-user-6',
+    displayName: 'Ananya Joshi',
+    email: 'ananya@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ananya&backgroundColor=a3e4d7',
+    bio: 'Data Science | Research intern at Google',
+    subjects: ['Python', 'Data Analysis', 'TensorFlow'],
+    mass: 5200,
+    level: 20,
+    rank: 'Quasar',
+    orbitStatus: 'High Gravity',
+    location: { latitude: 22.6820, longitude: 75.8808, timestamp: Date.now() },
+    followersCount: 456,
+    followingCount: 134,
+    createdAt: Date.now() - 90 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'demo-user-7',
+    displayName: 'Karan Mehta',
+    email: 'karan@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=karan&backgroundColor=ffeaa7',
+    bio: 'Mobile app developer | Flutter expert',
+    subjects: ['Flutter', 'Dart', 'Firebase'],
+    mass: 2100,
+    level: 11,
+    rank: 'Star',
+    orbitStatus: 'In Orbit',
+    location: { latitude: 22.6803, longitude: 75.8788, timestamp: Date.now() },
+    followersCount: 167,
+    followingCount: 145,
+    createdAt: Date.now() - 35 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  },
+  {
+    id: 'demo-user-8',
+    displayName: 'Divya Agarwal',
+    email: 'divya@ietdavv.edu.in',
+    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=divya&backgroundColor=fab1a0',
+    bio: 'Blockchain developer | Web3 builder',
+    subjects: ['Solidity', 'Ethereum', 'Smart Contracts'],
+    mass: 3450,
+    level: 16,
+    rank: 'Supernova',
+    orbitStatus: 'In Orbit',
+    location: { latitude: 22.6825, longitude: 75.8812, timestamp: Date.now() },
+    followersCount: 278,
+    followingCount: 89,
+    createdAt: Date.now() - 55 * 24 * 60 * 60 * 1000,
+    updatedAt: Date.now()
+  }
+]
+
+export const DEMO_IMPACT_STATS = {
+  hoursThisWeek: 4.5,
+  questsCompleted: 18,
+  currentStreak: 7,
+  totalHoursSaved: 42,
+  totalQuestsCompleted: 127,
+  longestStreak: 14,
+  studyBuddiesConnected: 12,
+  gapsOptimized: 89
+}

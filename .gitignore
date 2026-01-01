@@ -40,3 +40,8 @@ ios
 .firebase
 firebase-debug.log
 
+# Exceptions
+
+PITCH.md
+DEMO_SCRIPT.md
+cleanup_comments.js

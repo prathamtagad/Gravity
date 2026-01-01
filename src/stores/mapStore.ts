@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import type { UserProfile, UserLocation } from '@/types/user'
+import { DEMO_USERS } from '@/services/demo/demoData'
 
 interface MapState {
   center: { lat: number; lng: number }
@@ -12,11 +13,13 @@ interface MapState {
   setUsers: (users: UserProfile[]) => void
   setCurrentLocation: (location: UserLocation | null) => void
   setHeatMapMode: (mode: boolean) => void
+  loadDemoUsers: () => void
+  clearDemoUsers: () => void
 }
 
-export const useMapStore = create<MapState>((set) => ({
-  center: { lat: 37.7749, lng: -122.4194 },
-  zoom: 15,
+export const useMapStore = create<MapState>((set, get) => ({
+  center: { lat: 22.6811, lng: 75.8800 },
+  zoom: 17,
   users: [],
   currentLocation: null,
   isHeatMapMode: false,
@@ -25,4 +28,16 @@ export const useMapStore = create<MapState>((set) => ({
   setUsers: (users) => set({ users }),
   setCurrentLocation: (location) => set({ currentLocation: location }),
   setHeatMapMode: (isHeatMapMode) => set({ isHeatMapMode }),
+  loadDemoUsers: () => {
+    const currentUsers = get().users
+    const demoUsers = DEMO_USERS as UserProfile[]
+    const existingIds = new Set(currentUsers.map(u => u.id))
+    const newDemoUsers = demoUsers.filter(u => !existingIds.has(u.id))
+    set({ users: [...currentUsers, ...newDemoUsers] })
+  },
+  clearDemoUsers: () => {
+    const currentUsers = get().users
+    const nonDemoUsers = currentUsers.filter(u => !u.id.startsWith('demo-'))
+    set({ users: nonDemoUsers })
+  }
 }))

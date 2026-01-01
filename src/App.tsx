@@ -7,6 +7,8 @@ import { useChatStore } from '@stores/chatStore'
 import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary'
 import Loading from '@components/Loading/Loading'
 import Navigation from '@components/Navigation/Navigation'
+import { useTimetableStore } from '@stores/timetableStore'
+import { requestNotificationPermission, sendGapNotification } from '@services/notifications/notificationService'
 
 const GravityMap = React.lazy(() => import('@features/GravityMap/GravityMap'))
 const Profile = React.lazy(() => import('@features/Profile/Profile'))
@@ -92,10 +94,34 @@ function AppContent() {
 function App() {
   const { user, loading, initializeAuth } = useAuthStore()
   const { loadProfile } = useUserStore()
+  const { getCurrentGap } = useTimetableStore()
 
   useEffect(() => {
     initializeAuth()
+    requestNotificationPermission()
   }, [initializeAuth])
+
+  useEffect(() => {
+    if (!user) return
+    
+    const checkGaps = () => {
+      const gap = getCurrentGap()
+      if (gap) {
+        const storageKey = `notified-gap-${gap.id}`
+        const alreadyNotified = sessionStorage.getItem(storageKey)
+        
+        if (!alreadyNotified) {
+          sendGapNotification(gap.durationMinutes, gap.startTime)
+          sessionStorage.setItem(storageKey, 'true')
+        }
+      }
+    }
+
+    const interval = setInterval(checkGaps, 60000)
+    checkGaps() // Initial check
+
+    return () => clearInterval(interval)
+  }, [user, getCurrentGap])
 
   useEffect(() => {
     if (user) {

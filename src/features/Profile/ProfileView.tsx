@@ -1,5 +1,6 @@
 import React from 'react'
 import type { UserProfile } from '@/types/user'
+import { useImpactStore } from '@stores/impactStore'
 
 interface ProfileViewProps {
   profile: UserProfile
@@ -7,6 +8,8 @@ interface ProfileViewProps {
 }
 
 const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
+  const { stats } = useImpactStore()
+  
   return (
     <div className="w-full animate-reveal-up font-sans">
       <div className="max-w-7xl mx-auto w-full px-6 pt-20">
@@ -124,6 +127,39 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
                                       {s}
                                   </span>
                               )) || <span className="text-neutral-300 text-xs italic">No research targets defined.</span>}
+                          </div>
+                      </div>
+                  </div>
+
+                  <div className="lg:col-span-12">
+                      <div className="bg-gradient-to-r from-emerald-50 via-white to-blue-50 p-12 rounded-[48px] border border-emerald-100/50 shadow-sm">
+                          <h3 className="text-[11px] font-bold text-emerald-600 uppercase tracking-[0.3em] mb-10 flex items-center gap-2">
+                              <span>📊</span> Your Impact Metrics
+                          </h3>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                                  <span className="text-4xl md:text-5xl font-bold text-emerald-600 tabular-nums">{stats.totalHoursSaved.toFixed(1)}</span>
+                                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-2">Hours Saved</span>
+                              </div>
+                              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                                  <span className="text-4xl md:text-5xl font-bold text-blue-600 tabular-nums">{stats.totalQuestsCompleted}</span>
+                                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-2">Quests Done</span>
+                              </div>
+                              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                                  <span className="text-4xl md:text-5xl font-bold text-orange-500 tabular-nums">{stats.currentStreak}</span>
+                                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-2">Day Streak 🔥</span>
+                              </div>
+                              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                                  <span className="text-4xl md:text-5xl font-bold text-purple-600 tabular-nums">{stats.gapsOptimized}</span>
+                                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-2">Gaps Optimized</span>
+                              </div>
+                          </div>
+                          <div className="mt-8 pt-6 border-t border-neutral-100 flex flex-wrap items-center gap-4 text-xs text-neutral-400">
+                              <span>🎯 <strong className="text-neutral-600">{stats.studyBuddiesConnected}</strong> Study Buddies</span>
+                              <span>•</span>
+                              <span>🏆 Longest Streak: <strong className="text-neutral-600">{stats.longestStreak} days</strong></span>
+                              <span>•</span>
+                              <span>📅 This Week: <strong className="text-emerald-600">{stats.hoursThisWeek}h</strong></span>
                           </div>
                       </div>
                   </div>
