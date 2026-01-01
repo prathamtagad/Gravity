@@ -61,8 +61,8 @@ Built for **Hack'Vento 2026** by GDG on Campus IET DAVV
 | Name | Role |
 |------|------|
 | Pratham | Lead Developer |
-| [Prashray Sharma] | [AI & Data Specialist] |
-| [Samarth Purohit] | [Product Designer] |
+| [Prashray Sharma] | AI & Data Specialist |
+| [Samarth Purohit] | Product Designer |
 
 ---
 
