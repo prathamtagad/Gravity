@@ -26,6 +26,7 @@ const ChatPage: React.FC = () => {
   const navigate = useNavigate()
   
   const [inputText, setInputText] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
   const [showXp, setShowXp] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -86,6 +87,13 @@ const ChatPage: React.FC = () => {
       }
   }
 
+  const filteredConversations = conversations.filter(conv => {
+      if (!searchQuery.trim()) return true
+      const otherId = conv.participants.find(id => id !== user.uid) || ''
+      const partner = conv.participantProfiles?.[otherId]
+      return partner?.displayName?.toLowerCase().includes(searchQuery.toLowerCase())
+  })
+
   if (!user || !profile) return null
 
   const showChat = !!activeConversationId
@@ -103,33 +111,45 @@ const ChatPage: React.FC = () => {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" /></svg>
                  </button>
             </div>
-            
+
             <div className="px-6 md:px-8 mb-6 md:mb-8">
                 <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg className="w-5 h-5 text-neutral-400 group-focus-within:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </div>
                     <input 
                         type="text" 
-                        placeholder="Search" 
-                        className="w-full bg-neutral-100 md:bg-white border-none md:border md:border-neutral-100 rounded-xl md:rounded-2xl py-3 pl-10 pr-4 text-sm font-medium focus:ring-0 md:focus:ring-8 md:focus:ring-neutral-900/5 transition-all"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search conversations..." 
+                        className="block w-full pl-10 pr-3 py-3.5 border-none rounded-2xl leading-5 bg-neutral-100 text-neutral-900 placeholder-neutral-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-neutral-900/5 transition-all shadow-sm"
                     />
-                    <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-4 md:px-6 space-y-1 pb-20 md:pb-10">
-                 {conversations.length === 0 ? (
-                    <div className="py-20 px-10">
-                        <EmptyState 
-                            icon="🛰️"
-                            title="No Signals"
-                            description="Connect with others on the map to start a conversation."
-                            action={{
-                                label: "Find Voyagers",
-                                onClick: () => navigate('/')
-                            }}
-                        />
+            <div className="flex-1 overflow-y-auto px-4 md:px-6 space-y-2 pb-20 md:pb-10 custom-scrollbar">
+                 {filteredConversations.length === 0 ? (
+                    <div className="py-20 px-10 text-center">
+                        {searchQuery ? (
+                            <>
+                                <div className="text-3xl mb-2">🔍</div>
+                                <h3 className="text-neutral-900 font-bold">No results found</h3>
+                                <p className="text-neutral-500 text-sm mt-1">Try a different name</p>
+                            </>
+                        ) : (
+                            <EmptyState 
+                                icon="🛰️"
+                                title="No Signals"
+                                description="Connect with others on the map to start a conversation."
+                                action={{
+                                    label: "Find Voyagers",
+                                    onClick: () => navigate('/')
+                                }}
+                            />
+                        )}
                     </div>
                  ) : (
-                    conversations.map((conv, index) => {
+                    filteredConversations.map((conv, index) => {
                         const otherId = conv.participants.find(id => id !== user.uid)
                         const partner = conv.participantProfiles?.[otherId || '']
                         const isActive = activeConversationId === conv.id
@@ -141,8 +161,8 @@ const ChatPage: React.FC = () => {
                                key={conv.id}
                                onClick={() => handleConversationClick(conv)}
                                className={`
-                                 group flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all relative stagger-item
-                                 ${isActive ? 'bg-neutral-100 md:bg-white md:shadow-[0_12px_40px_rgb(0,0,0,0.06)] md:border md:border-neutral-100' : 'hover:bg-neutral-50'}
+                                 group flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all relative stagger-item border border-transparent
+                                 ${isActive ? 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] border-neutral-100 scale-[1.02]' : 'hover:bg-neutral-50 hover:scale-[1.01]'}
                                `}
                                style={{ animationDelay: `${index * 0.05}s` }}
                             >
@@ -167,7 +187,7 @@ const ChatPage: React.FC = () => {
 
           <div className={`
             flex-1 flex flex-col bg-white relative
-            ${showChat ? 'fixed inset-0 z-[2000] w-full h-[100dvh] overscroll-none' : 'hidden md:flex h-full'}
+            ${showChat ? 'fixed inset-0 z-[2000] w-full h-[100dvh] overscroll-none md:static md:h-full md:flex-1 md:z-0' : 'hidden md:flex md:flex-1 h-full'}
           `}>
               {!activeConversationId ? (
                   <div className="flex-1 flex flex-col items-center justify-center">
@@ -267,11 +287,11 @@ const ChatPage: React.FC = () => {
                         <div ref={messagesEndRef} />
                     </div>
 
-                    <div className="p-3 md:p-4 bg-white shrink-0 pb-safe">
-                        <div className="flex items-center gap-2 bg-neutral-100 rounded-[26px] p-1.5 pl-4 transition-all focus-within:ring-2 focus-within:ring-neutral-900/5">
-                            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shrink-0 cursor-pointer">
-                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                            </div>
+                    <div className="p-4 md:p-6 bg-white shrink-0 pb-safe">
+                        <div className="flex items-center gap-3 bg-neutral-100 rounded-[28px] p-2 pl-2 transition-all ring-1 ring-transparent focus-within:ring-neutral-200 focus-within:bg-white">
+                            <button className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center shrink-0 cursor-pointer hover:scale-105 transition-transform active:scale-95 shadow-md group">
+                                <svg className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            </button>
                             
                             <textarea 
                                 rows={1}
@@ -283,21 +303,21 @@ const ChatPage: React.FC = () => {
                                         handleSend()
                                     }
                                 }}
-                                placeholder="Message..."
-                                className="flex-1 bg-transparent border-none outline-none text-neutral-900 placeholder:text-neutral-500 text-[15px] resize-none h-6 py-0.5 ml-1"
-                                style={{ minHeight: '24px', maxHeight: '100px' }}
+                                placeholder="Write a message..."
+                                className="flex-1 bg-transparent border-none outline-none text-neutral-900 placeholder:text-neutral-400 text-[15px] resize-none py-2.5 px-1 font-medium leading-relaxed"
+                                style={{ minHeight: '44px', maxHeight: '120px' }}
                             />
                             
                             {inputText.trim() ? (
                                 <button 
                                     onClick={() => handleSend()}
-                                    className="p-2 text-blue-500 font-bold text-sm hover:text-blue-600 transition-colors mr-1"
+                                    className="px-5 py-2.5 bg-neutral-900 text-white font-bold text-sm rounded-full hover:bg-black transition-all shadow-md active:scale-95"
                                 >
                                     Send
                                 </button>
                             ) : (
-                                <div className="flex items-center gap-1 pr-2 text-neutral-400">
-                                   <button className="p-1 hover:text-neutral-900"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></button>
+                                <div className="flex items-center gap-1 pr-3 text-neutral-400">
+                                   <button className="p-2 hover:bg-neutral-200 rounded-full transition-colors hover:text-neutral-900"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
                                 </div>
                             )}
                         </div>

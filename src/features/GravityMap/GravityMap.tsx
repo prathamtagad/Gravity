@@ -14,6 +14,7 @@ import BlackHoleTimer from '@features/BlackHole/BlackHoleTimer'
 import { calculateGravityPull } from '@services/matching/gravityEngine'
 import { getZoneStatus } from '@services/map/heatZoneService'
 import LiveActivityTicker from '@components/Map/LiveActivityTicker'
+import GapNavigator from '@features/GapNavigator/GapNavigator'
 import type { UserProfile, UserLocation } from '@/types/user'
 
 const clusterMarkers = (users: UserProfile[], zoom: number) => {
@@ -202,6 +203,10 @@ const GravityMap: React.FC = () => {
       className: 'aura-cluster',
     })
   }
+
+  const [showGapNavigator, setShowGapNavigator] = useState(false)
+
+  // ... (previous useEffects)
 
   return (
     <div className="relative w-full h-[calc(100vh-120px)] lg:h-[calc(100vh-80px)] bg-neutral-50 font-sans">
@@ -406,6 +411,14 @@ const GravityMap: React.FC = () => {
              </span>
           )}
         </button>
+
+        <button
+          onClick={() => setShowGapNavigator(true)}
+          className="group flex items-center gap-3 px-6 py-3.5 rounded-3xl font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95 bg-white text-neutral-900 border-white hover:bg-neutral-50"
+        >
+           <span className="text-lg">⚡</span>
+           <span>Gap Navigator</span>
+        </button>
       </div>
 
       <OrbitStatus
@@ -417,6 +430,8 @@ const GravityMap: React.FC = () => {
       <LiveActivityTicker users={users} />
       
       <BlackHoleTimer />
+
+      {showGapNavigator && <GapNavigator onClose={() => setShowGapNavigator(false)} />}
 
       {locationError && (
         <div className="fixed top-24 left-6 right-6 md:left-auto md:right-8 md:w-80 bg-white border border-red-100 rounded-3xl p-5 z-[1000] shadow-xl animate-reveal-up">

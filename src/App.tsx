@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import ContinuumPopup from '@features/Continuum/ContinuumPopup'
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '@stores/authStore'
 import { useUserStore } from '@stores/userStore'
@@ -25,6 +26,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-neutral-50 flex flex-col">
       {user && <Navigation />}
+      {user && <ContinuumPopup />}
       <main className={`flex-1 ${user && !isMobileChat ? 'pb-20 lg:pb-0' : ''}`}>
         <Routes>
           <Route

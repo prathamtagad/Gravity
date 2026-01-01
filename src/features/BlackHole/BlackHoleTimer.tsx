@@ -33,7 +33,7 @@ const BlackHoleTimer: React.FC = () => {
           if (profile) {
               updateProfile(profile.id, {
                   orbitStatus: 'In Orbit',
-                  eventHorizonEndTime: undefined,
+                  eventHorizonEndTime: null as any,
                   mass: (profile.mass || 0) + 100
               })
           }
