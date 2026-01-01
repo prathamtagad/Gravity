@@ -14,12 +14,12 @@ Your Firebase project has been configured with the following settings:
 The `.env.local` file has been created with your Firebase configuration:
 
 ```env
-VITE_FIREBASE_API_KEY=AIzaSyBxf97EV8aCmKqRa_t_mQVo-hpDq1k-7KM
-VITE_FIREBASE_AUTH_DOMAIN=gravity-study-hack.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=gravity-study-hack
-VITE_FIREBASE_MESSAGING_SENDER_ID=54480158682
-VITE_FIREBASE_APP_ID=1:54480158682:web:7352f35aaa21fc62f04ae3
-VITE_FIREBASE_MEASUREMENT_ID=G-V55Z0YL9Q1
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+VITE_FIREBASE_MEASUREMENT_ID=
 ```
 
 ## Services Configured
