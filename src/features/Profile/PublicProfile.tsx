@@ -1,4 +1,4 @@
-wimport React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@stores/authStore'
 import { useUserStore } from '@stores/userStore'
