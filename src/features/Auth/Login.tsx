@@ -38,7 +38,7 @@ const Login: React.FC = () => {
           onClick={handleGoogleSignIn}
           disabled={loading}
           className={`
-            w-full flex items-center justify-center gap-4 py-5 rounded-3xl font-bold transition-all shadow-lg active:scale-95 border border-neutral-100
+            w-full flex items-center justify-center gap-4 py-5 rounded-3xl font-bold transition-all shadow-lg active:scale-95 border border-neutral-100 mb-4
             ${loading ? 'bg-neutral-50 text-neutral-300 cursor-not-allowed' : 'bg-white text-neutral-900 hover:bg-neutral-50 shadow-[0_8px_30px_rgb(0,0,0,0.04)]'}
           `}
         >

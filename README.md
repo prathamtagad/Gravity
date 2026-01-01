@@ -164,7 +164,7 @@ Built for **Hack'Vento 2026** by GDG on Campus IET DAVV
 
 ## 🌐 Live Demo
 
-- **Web App**: [gravity-study.vercel.app](https://gravity-study.vercel.app) *(Update after deployment)*
+- **Web App**: [gravity-study.vercel.app](https://gravity-study.netlify.app/)
 - **Demo Video**: [YouTube Link](https://youtube.com/watch?v=xxxxx) *(Add after recording)*
 - **APK Download**: [Releases](https://github.com/username/gravity-study/releases)
 

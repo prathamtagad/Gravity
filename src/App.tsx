@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import ContinuumPopup from '@features/Continuum/ContinuumPopup'
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '@stores/authStore'
 import { useUserStore } from '@stores/userStore'
 import { useChatStore } from '@stores/chatStore'
