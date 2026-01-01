@@ -157,10 +157,10 @@ Built for **Hack'Vento 2026** by GDG on Campus IET DAVV
 
 | Name | Role | GitHub |
 |------|------|--------|
-| Pratham | Full Stack Developer | [@pratham](https://github.com/pratham) |
-| [Team Member 2] | [Role] | [@username](https://github.com/username) |
-| [Team Member 3] | [Role] | [@username](https://github.com/username) |
-| [Team Member 4] | [Role] | [@username](https://github.com/username) |
+| Pratham | **Lead Software Engineer** (Full Stack & Architecture) | [@pratham](https://github.com/pratham) |
+| [Member 2] | **AI & Data Specialist** (Gemini Algorithms & Logic) | [@username](https://github.com/username) |
+| [Member 3] | **Product Designer** (UI/UX & Frontend Interaction) | [@username](https://github.com/username) |
+| [Member 4] | **Cloud Engineer** (Firebase, Maps & Geolocation) | [@username](https://github.com/username) |
 
 ---
 
