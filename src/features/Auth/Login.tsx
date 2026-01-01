@@ -25,8 +25,8 @@ const Login: React.FC = () => {
       </div>
 
       <div className="max-w-md w-full bg-white/60 backdrop-blur-3xl rounded-[64px] shadow-[0_32px_120px_rgb(0,0,0,0.06)] border border-white p-12 text-center relative z-10">
-        <div className="w-24 h-24 bg-neutral-900 rounded-[28px] flex items-center justify-center mx-auto mb-10 shadow-2xl">
-           <span className="text-4xl">🌌</span>
+        <div className="w-24 h-24 mx-auto mb-10 shadow-2xl rounded-[28px] overflow-hidden group-hover:scale-105 transition-transform">
+           <img src="/logo.png" alt="Gravity Logo" className="w-full h-full object-cover" />
         </div>
         
         <h1 className="text-4xl font-bold text-neutral-900 tracking-tight mb-4">Gravity</h1>

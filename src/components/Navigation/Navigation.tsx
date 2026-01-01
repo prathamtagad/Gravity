@@ -96,8 +96,8 @@ const Navigation: React.FC = () => {
       <nav className="hidden lg:block sticky top-0 left-0 right-0 z-[1100] w-full bg-white/80 backdrop-blur-2xl border-b border-neutral-100 shadow-sm font-sans">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-neutral-900 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-               <span className="text-xl">🌌</span>
+            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+               <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-neutral-900 tracking-tight leading-none">GRAVITY</span>
@@ -150,7 +150,7 @@ const Navigation: React.FC = () => {
       {!isMobileChat && (
         <header className="lg:hidden sticky top-0 left-0 right-0 z-[1100] w-full h-14 bg-white/90 backdrop-blur-xl border-b border-neutral-50 flex items-center justify-between px-5 font-sans">
             <div className="flex items-center gap-2.5">
-            <span className="text-xl">🌌</span>
+            <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm" />
             <span className="text-lg font-black text-neutral-900 tracking-tighter">Gravity</span>
             </div>
             
