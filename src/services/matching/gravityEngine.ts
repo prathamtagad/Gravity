@@ -86,16 +86,26 @@ export const calculateGravityPull = (
 export const calculateLevelInfo = (mass: number = 0) => {
   const level = Math.floor(Math.sqrt(mass / 50)) + 1;
   const ranks = [
-    'Stellar Dust',
-    'Asteroid',
-    'Moon',
-    'Planet',
-    'Protostar',
-    'Main Sequence',
-    'Giant',
-    'Supernova',
-    'Neutron Star',
-    'Black Hole'
+    'Stellar Dust',      // Level 1
+    'Cosmic Particle',   // Level 2
+    'Asteroid',          // Level 3
+    'Comet',             // Level 4
+    'Moon',              // Level 5
+    'Planet',            // Level 6
+    'Gas Giant',         // Level 7
+    'Protostar',         // Level 8
+    'Red Dwarf',         // Level 9
+    'Main Sequence',     // Level 10
+    'Blue Giant',        // Level 11
+    'Red Giant',         // Level 12
+    'White Dwarf',       // Level 13
+    'Supernova',         // Level 14
+    'Neutron Star',      // Level 15
+    'Pulsar',            // Level 16
+    'Magnetar',          // Level 17
+    'Quasar',            // Level 18
+    'Black Hole',        // Level 19
+    'Multiverse Entity'  // Level 20
   ];
   
   const rankIndex = Math.min(level - 1, ranks.length - 1);

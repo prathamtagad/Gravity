@@ -63,17 +63,17 @@ const Modal: React.FC<ModalProps> = ({
 
       {/* Modal Content - Animate enter */}
       <div
-        className={`relative bg-white rounded-2xl shadow-2xl ${sizeStyles[size]} w-full max-h-[90vh] overflow-y-auto transform transition-all animate-slide-in border border-white/20`}
+        className={`relative bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl ${sizeStyles[size]} w-full max-h-[90vh] overflow-y-auto transform transition-all animate-slide-in border border-white/20 dark:border-neutral-800`}
         onClick={(e) => e.stopPropagation()}
       >
         {title && (
-          <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+          <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-neutral-800 bg-gradient-to-r from-gray-50 to-white dark:from-neutral-900 dark:to-neutral-900/50">
             <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gravity-primary to-purple-600">
               {title}
             </h2>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800 text-gray-400 dark:text-gray-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors"
             >
               <span className="text-xl leading-none">&times;</span>
             </button>

@@ -61,16 +61,16 @@ const OrbitStatus: React.FC<OrbitStatusProps> = () => {
   return (
     <>
       <div className="fixed bottom-6 left-4 right-4 md:left-auto md:right-8 md:w-96 z-[1000] animate-reveal-up" style={{ animationDelay: '0.6s' }}>
-        <div className="glass-panel p-1 rounded-3xl bg-gradient-to-r from-white/90 to-white/70 shadow-2xl shadow-purple-500/10 border-white/50">
-          <div className="bg-white/40 backdrop-blur-md rounded-[22px] p-4 border border-white/40">
+        <div className="glass-panel p-1 rounded-3xl bg-gradient-to-r from-white/90 to-white/70 dark:from-neutral-900/90 dark:to-neutral-900/70 shadow-2xl shadow-purple-500/10 dark:shadow-none border-white/50 dark:border-white/10 transition-colors duration-300">
+          <div className="bg-white/40 dark:bg-black/40 backdrop-blur-md rounded-[22px] p-4 border border-white/40 dark:border-white/5 transition-colors duration-300">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20 animate-pulse-subtle">
                   <span className="text-xl">🪐</span>
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900 leading-none mb-1">Orbit Status</h3>
-                  <p className="text-[10px] text-gray-500 font-medium tracking-wider uppercase">Live Activity</p>
+                  <h3 className="font-bold text-gray-900 dark:text-white leading-none mb-1">Orbit Status</h3>
+                  <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">Live Activity</p>
                 </div>
               </div>
               <Button
@@ -86,16 +86,16 @@ const OrbitStatus: React.FC<OrbitStatusProps> = () => {
             {profile.orbitStatus ? (
               <div 
                 onClick={() => setIsModalOpen(true)}
-                className="relative overflow-hidden group rounded-2xl bg-gradient-to-r from-gravity-primary/10 to-blue-500/10 p-4 border border-gravity-primary/10 cursor-pointer transition-premium hover:scale-[1.02]"
+                className="relative overflow-hidden group rounded-2xl bg-gradient-to-r from-gravity-primary/10 to-blue-500/10 dark:from-gravity-primary/20 dark:to-blue-500/20 p-4 border border-gravity-primary/10 dark:border-gravity-primary/20 cursor-pointer transition-premium hover:scale-[1.02]"
               >
                 <div className="relative z-10 flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)] animate-pulse" />
-                    <span className="text-gray-900 font-bold text-sm tracking-tight">
+                    <span className="text-gray-900 dark:text-white font-bold text-sm tracking-tight">
                       {typeof profile.orbitStatus === 'string' ? profile.orbitStatus : (profile.orbitStatus as any)?.label}
                     </span>
                   </div>
-                  <span className="text-gray-400 group-hover:text-gray-600 transition-colors">
+                  <span className="text-gray-400 dark:text-white/60 group-hover:text-gray-600 dark:group-hover:text-white transition-colors">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
                   </span>
                 </div>
@@ -104,9 +104,9 @@ const OrbitStatus: React.FC<OrbitStatusProps> = () => {
             ) : (
               <div 
                 onClick={() => setIsModalOpen(true)}
-                className="cursor-pointer rounded-2xl border-2 border-dashed border-gray-200 p-4 text-center hover:border-gravity-primary/40 hover:bg-gravity-primary/5 transition-premium group"
+                className="cursor-pointer rounded-2xl border-2 border-dashed border-gray-200 dark:border-neutral-700 p-4 text-center hover:border-gravity-primary/40 hover:bg-gravity-primary/5 dark:hover:bg-gravity-primary/10 transition-premium group"
               >
-                <p className="text-sm text-gray-500 group-hover:text-gravity-primary font-bold">
+                <p className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-gravity-primary font-bold">
                   Tap to set your study mode ✨
                 </p>
               </div>
@@ -128,20 +128,20 @@ const OrbitStatus: React.FC<OrbitStatusProps> = () => {
               onClick={() => handleStatusChange(mode)}
               className={`w-full relative overflow-hidden p-4 rounded-xl text-left transition-all duration-200 border-2 group ${
                 profile.orbitStatus === mode.label
-                  ? 'border-gravity-primary bg-gravity-primary/5'
-                  : 'border-transparent bg-gray-50 hover:bg-white hover:shadow-md'
+                  ? 'border-gravity-primary bg-gravity-primary/5 dark:bg-gravity-primary/20'
+                  : 'border-transparent bg-gray-50 dark:bg-neutral-800 hover:bg-white dark:hover:bg-neutral-700 hover:shadow-md'
               }`}
             >
               <div className="flex items-start gap-4">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-sm ${
-                  mode.id === 'in-orbit' ? 'bg-green-100' : 
-                  mode.id === 'high-gravity' ? 'bg-purple-100' : 'bg-red-100'
+                  mode.id === 'in-orbit' ? 'bg-green-100 dark:bg-green-900' : 
+                  mode.id === 'high-gravity' ? 'bg-purple-100 dark:bg-purple-900' : 'bg-red-100 dark:bg-red-900'
                 }`}>
                   {mode.icon}
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">{mode.label}</h4>
-                  <p className="text-sm text-gray-500">{mode.description}</p>
+                  <h4 className="font-bold text-gray-900 dark:text-white">{mode.label}</h4>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{mode.description}</p>
                 </div>
               </div>
               

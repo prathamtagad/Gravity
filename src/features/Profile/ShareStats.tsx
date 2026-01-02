@@ -38,8 +38,12 @@ Join me on Gravity Study! 📚✨`
   }
 
   return (
-    <div className="fixed inset-0 bg-black/30 backdrop-blur-md z-[2000] flex items-center justify-center animate-reveal-up p-6">
-      <div className="w-full max-w-md bg-white rounded-[32px] shadow-2xl overflow-hidden">
+    <div 
+      className="fixed top-0 left-0 right-0 bottom-0 bg-black/40 backdrop-blur-md z-[9999] flex items-center justify-center p-4"
+      style={{ position: 'fixed', height: '100vh', width: '100vw' }}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className="w-full max-w-md bg-white rounded-[32px] shadow-2xl overflow-hidden animate-scale-in">
         
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">

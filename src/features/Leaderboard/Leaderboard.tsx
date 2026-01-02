@@ -59,9 +59,9 @@ const Leaderboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 pb-32 font-sans">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 pb-32 font-sans transition-colors duration-300">
       {/* Header */}
-      <div className="bg-gradient-to-b from-neutral-900 to-neutral-800 text-white px-4 pt-16 pb-24 md:pb-32">
+      <div className="bg-gradient-to-b from-neutral-900 to-neutral-800 dark:from-black dark:to-neutral-900 text-white px-4 pt-16 pb-24 md:pb-32 transition-colors duration-300">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-2">
             🏆 Leaderboard
@@ -79,20 +79,20 @@ const Leaderboard: React.FC = () => {
           {topUsers[1] && (
             <div 
               onClick={() => navigate(`/profile/${topUsers[1].id}`)}
-              className="flex-1 max-w-[110px] md:max-w-[140px] bg-white rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-lg border border-neutral-100 text-center cursor-pointer active:scale-95 transition-all"
+              className="flex-1 max-w-[110px] md:max-w-[140px] bg-white dark:bg-neutral-800 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-lg border border-neutral-100 dark:border-neutral-700 text-center cursor-pointer active:scale-95 transition-all"
             >
               <div className="relative inline-block mb-2">
                 <img 
                   src={topUsers[1].photoURL || '/default-avatar.png'} 
-                  className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl object-cover border-2 border-neutral-200"
+                  className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl object-cover border-2 border-neutral-200 dark:border-neutral-700"
                 />
-                <div className="absolute -bottom-2 -right-2 w-7 h-7 md:w-8 md:h-8 bg-neutral-200 rounded-lg flex items-center justify-center text-sm font-bold">
+                <div className="absolute -bottom-2 -right-2 w-7 h-7 md:w-8 md:h-8 bg-neutral-200 dark:bg-neutral-700 rounded-lg flex items-center justify-center text-sm font-bold text-neutral-600 dark:text-white">
                   2
                 </div>
               </div>
-              <h3 className="font-bold text-neutral-900 text-xs md:text-sm truncate">{topUsers[1].displayName?.split(' ')[0]}</h3>
-              <p className="text-[10px] text-neutral-400 font-medium mt-0.5">{topUsers[1].rank || 'Star'}</p>
-              <div className="mt-2 text-sm md:text-base font-bold text-neutral-700">
+              <h3 className="font-bold text-neutral-900 dark:text-white text-xs md:text-sm truncate">{topUsers[1].displayName?.split(' ')[0]}</h3>
+              <p className="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium mt-0.5">{topUsers[1].rank || 'Star'}</p>
+              <div className="mt-2 text-sm md:text-base font-bold text-neutral-700 dark:text-neutral-300">
                 {((topUsers[1].mass || 0) / 1000).toFixed(1)}k
               </div>
             </div>
@@ -102,22 +102,22 @@ const Leaderboard: React.FC = () => {
           {topUsers[0] && (
             <div 
               onClick={() => navigate(`/profile/${topUsers[0].id}`)}
-              className="flex-1 max-w-[130px] md:max-w-[160px] bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl border border-amber-200 text-center cursor-pointer active:scale-95 transition-all -mt-6"
+              className="flex-1 max-w-[130px] md:max-w-[160px] bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl border border-amber-200 dark:border-amber-700/50 text-center cursor-pointer active:scale-95 transition-all -mt-6"
             >
               <div className="text-2xl md:text-3xl mb-1 animate-bounce">👑</div>
               <div className="relative inline-block mb-2">
                 <img 
                   src={topUsers[0].photoURL || '/default-avatar.png'} 
-                  className="w-18 h-18 md:w-24 md:h-24 rounded-xl md:rounded-2xl object-cover border-3 border-amber-300 shadow-lg"
+                  className="w-18 h-18 md:w-24 md:h-24 rounded-xl md:rounded-2xl object-cover border-3 border-amber-300 dark:border-amber-500 shadow-lg"
                   style={{ width: '72px', height: '72px' }}
                 />
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-amber-400 rounded-xl flex items-center justify-center text-base md:text-lg font-bold text-white shadow-lg">
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-amber-400 dark:bg-amber-500 rounded-xl flex items-center justify-center text-base md:text-lg font-bold text-white shadow-lg">
                   1
                 </div>
               </div>
-              <h3 className="font-bold text-neutral-900 text-sm md:text-base truncate">{topUsers[0].displayName?.split(' ')[0]}</h3>
-              <p className="text-[10px] text-amber-600 font-bold mt-0.5">Apex Voyager</p>
-              <div className="mt-3 bg-neutral-900 text-white px-4 py-1.5 rounded-xl text-sm md:text-base font-bold">
+              <h3 className="font-bold text-neutral-900 dark:text-white text-sm md:text-base truncate">{topUsers[0].displayName?.split(' ')[0]}</h3>
+              <p className="text-[10px] text-amber-600 dark:text-amber-400 font-bold mt-0.5">Apex Voyager</p>
+              <div className="mt-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-4 py-1.5 rounded-xl text-sm md:text-base font-bold">
                 {((topUsers[0].mass || 0) / 1000).toFixed(1)}k XP
               </div>
             </div>
@@ -127,20 +127,20 @@ const Leaderboard: React.FC = () => {
           {topUsers[2] && (
             <div 
               onClick={() => navigate(`/profile/${topUsers[2].id}`)}
-              className="flex-1 max-w-[110px] md:max-w-[140px] bg-white rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-lg border border-neutral-100 text-center cursor-pointer active:scale-95 transition-all"
+              className="flex-1 max-w-[110px] md:max-w-[140px] bg-white dark:bg-neutral-800 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-lg border border-neutral-100 dark:border-neutral-700 text-center cursor-pointer active:scale-95 transition-all"
             >
               <div className="relative inline-block mb-2">
                 <img 
                   src={topUsers[2].photoURL || '/default-avatar.png'} 
-                  className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl object-cover border-2 border-neutral-200"
+                  className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl object-cover border-2 border-neutral-200 dark:border-neutral-700"
                 />
-                <div className="absolute -bottom-2 -right-2 w-7 h-7 md:w-8 md:h-8 bg-orange-100 rounded-lg flex items-center justify-center text-sm font-bold text-orange-600">
+                <div className="absolute -bottom-2 -right-2 w-7 h-7 md:w-8 md:h-8 bg-orange-100 dark:bg-orange-900/50 rounded-lg flex items-center justify-center text-sm font-bold text-orange-600 dark:text-orange-400">
                   3
                 </div>
               </div>
-              <h3 className="font-bold text-neutral-900 text-xs md:text-sm truncate">{topUsers[2].displayName?.split(' ')[0]}</h3>
-              <p className="text-[10px] text-neutral-400 font-medium mt-0.5">{topUsers[2].rank || 'Star'}</p>
-              <div className="mt-2 text-sm md:text-base font-bold text-neutral-700">
+              <h3 className="font-bold text-neutral-900 dark:text-white text-xs md:text-sm truncate">{topUsers[2].displayName?.split(' ')[0]}</h3>
+              <p className="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium mt-0.5">{topUsers[2].rank || 'Star'}</p>
+              <div className="mt-2 text-sm md:text-base font-bold text-neutral-700 dark:text-neutral-300">
                 {((topUsers[2].mass || 0) / 1000).toFixed(1)}k
               </div>
             </div>
@@ -150,11 +150,11 @@ const Leaderboard: React.FC = () => {
 
       {/* Leaderboard List - Mobile Optimized */}
       <div className="max-w-2xl mx-auto px-4">
-        <div className="bg-white rounded-3xl shadow-lg border border-neutral-100 overflow-hidden">
+        <div className="bg-white dark:bg-neutral-800 rounded-3xl shadow-lg border border-neutral-100 dark:border-neutral-700 overflow-hidden transition-colors">
           {/* Header */}
-          <div className="px-4 py-3 bg-neutral-50 border-b border-neutral-100 flex justify-between items-center">
-            <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider">All Rankings</span>
-            <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-wider bg-neutral-200 px-2 py-1 rounded-full">
+          <div className="px-4 py-3 bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-100 dark:border-neutral-700 flex justify-between items-center transition-colors">
+            <span className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">All Rankings</span>
+            <span className="text-[9px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider bg-neutral-200 dark:bg-neutral-800 px-2 py-1 rounded-full">
               {topUsers.length} Students
             </span>
           </div>
@@ -173,17 +173,17 @@ const Leaderboard: React.FC = () => {
               />
             </div>
           ) : (
-            <div className="divide-y divide-neutral-100">
+            <div className="divide-y divide-neutral-100 dark:divide-neutral-700">
               {topUsers.map((user, index) => (
                 <div 
                   key={user.id} 
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 active:bg-neutral-100 cursor-pointer transition-all"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 active:bg-neutral-100 dark:active:bg-neutral-700 cursor-pointer transition-all"
                   onClick={() => navigate(`/profile/${user.id}`)}
                 >
                   {/* Rank */}
                   <div className="w-8 text-center">
                     {getMedalEmoji(index + 1) || (
-                      <span className="text-sm font-bold text-neutral-300">#{index + 1}</span>
+                      <span className="text-sm font-bold text-neutral-300 dark:text-neutral-600">#{index + 1}</span>
                     )}
                   </div>
 
@@ -191,37 +191,37 @@ const Leaderboard: React.FC = () => {
                   <div className="relative">
                     <img 
                       src={user.photoURL || '/default-avatar.png'} 
-                      className="w-12 h-12 rounded-xl object-cover border border-neutral-100"
+                      className="w-12 h-12 rounded-xl object-cover border border-neutral-100 dark:border-neutral-700"
                     />
                     {user.orbitStatus === 'Event Horizon' && (
-                      <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-purple-500 border-2 border-white rounded-full flex items-center justify-center">
+                      <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-purple-500 border-2 border-white dark:border-neutral-800 rounded-full flex items-center justify-center">
                         <span className="text-[8px]">🕳️</span>
                       </div>
                     )}
                     {user.orbitStatus === 'High Gravity' && (
-                      <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
+                      <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-500 border-2 border-white dark:border-neutral-800 rounded-full" />
                     )}
                   </div>
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-neutral-900 text-sm truncate">{user.displayName}</h3>
+                      <h3 className="font-bold text-neutral-900 dark:text-white text-sm truncate">{user.displayName}</h3>
                       {getStreakEmoji((user as any).streak)}
                     </div>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-[10px] font-medium text-neutral-400">LVL {user.level || 1}</span>
-                      <span className="text-[10px] text-neutral-300">•</span>
-                      <span className="text-[10px] font-medium text-indigo-500">{user.rank || 'Star'}</span>
+                      <span className="text-[10px] font-medium text-neutral-400 dark:text-neutral-500">LVL {user.level || 1}</span>
+                      <span className="text-[10px] text-neutral-300 dark:text-neutral-600">•</span>
+                      <span className="text-[10px] font-medium text-indigo-500 dark:text-indigo-400">{user.rank || 'Star'}</span>
                     </div>
                   </div>
 
                   {/* XP */}
                   <div className="text-right">
-                    <div className="text-base font-bold text-neutral-900 tabular-nums">
+                    <div className="text-base font-bold text-neutral-900 dark:text-white tabular-nums">
                       {(user.mass || 0).toLocaleString()}
                     </div>
-                    <div className="text-[9px] font-medium text-neutral-400 uppercase">XP</div>
+                    <div className="text-[9px] font-medium text-neutral-400 dark:text-neutral-500 uppercase">XP</div>
                   </div>
                 </div>
               ))}
@@ -231,9 +231,9 @@ const Leaderboard: React.FC = () => {
 
         {/* Footer CTA */}
         <div className="mt-6 text-center">
-          <div className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-md border border-neutral-100">
+          <div className="inline-flex items-center gap-3 bg-white dark:bg-neutral-800 px-5 py-3 rounded-2xl shadow-md border border-neutral-100 dark:border-neutral-700 transition-colors">
             <span className="text-xl">💡</span>
-            <p className="text-xs text-neutral-500 font-medium">Complete quests to climb the ranks!</p>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 font-medium">Complete quests to climb the ranks!</p>
           </div>
         </div>
       </div>

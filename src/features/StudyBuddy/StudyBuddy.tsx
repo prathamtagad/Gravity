@@ -128,24 +128,24 @@ Student's question: ${userQuery}`
 
   return (
     <div className="fixed inset-0 bg-black/30 backdrop-blur-md z-[2000] flex items-end sm:items-center justify-center animate-reveal-up">
-      <div className="w-full max-w-lg bg-white rounded-t-[32px] sm:rounded-[32px] shadow-2xl flex flex-col max-h-[85vh] sm:max-h-[600px]">
+      <div className="w-full max-w-lg bg-white dark:bg-neutral-900 rounded-t-[32px] sm:rounded-[32px] shadow-2xl flex flex-col max-h-[85vh] sm:max-h-[600px] transition-colors duration-300">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 dark:border-neutral-800">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
               <span className="text-white text-xl">🤖</span>
             </div>
             <div>
-              <h2 className="text-lg font-bold text-neutral-900">AI Study Buddy</h2>
+              <h2 className="text-lg font-bold text-neutral-900 dark:text-white">AI Study Buddy</h2>
               <p className="text-xs text-neutral-400 font-medium">Powered by Gemini</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-xl bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-all"
+            className="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 flex items-center justify-center transition-all text-neutral-600 dark:text-neutral-300"
           >
-            <svg className="w-5 h-5 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -161,8 +161,8 @@ Student's question: ${userQuery}`
               <div
                 className={`max-w-[85%] px-4 py-3 rounded-2xl ${
                   message.role === 'user'
-                    ? 'bg-neutral-900 text-white rounded-br-md'
-                    : 'bg-neutral-100 text-neutral-800 rounded-bl-md'
+                    ? 'bg-neutral-900 dark:bg-white text-white dark:text-black rounded-br-md'
+                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 rounded-bl-md'
                 }`}
               >
                 <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
@@ -172,7 +172,7 @@ Student's question: ${userQuery}`
           
           {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-neutral-100 px-4 py-3 rounded-2xl rounded-bl-md">
+              <div className="bg-neutral-100 dark:bg-neutral-800 px-4 py-3 rounded-2xl rounded-bl-md">
                 <div className="flex gap-1.5">
                   <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                   <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -194,7 +194,7 @@ Student's question: ${userQuery}`
                 <button
                   key={i}
                   onClick={() => { setInput(q); inputRef.current?.focus() }}
-                  className="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-600 text-xs font-medium rounded-full transition-all"
+                  className="px-3 py-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs font-medium rounded-full transition-all"
                 >
                   {q}
                 </button>
@@ -204,7 +204,7 @@ Student's question: ${userQuery}`
         )}
 
         {/* Input */}
-        <div className="px-6 py-4 border-t border-neutral-100">
+        <div className="px-6 py-4 border-t border-neutral-100 dark:border-neutral-800">
           <div className="flex gap-3">
             <input
               ref={inputRef}
@@ -213,13 +213,13 @@ Student's question: ${userQuery}`
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask me anything..."
-              className="flex-1 px-4 py-3 bg-neutral-100 border-0 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-200 placeholder:text-neutral-400"
+              className="flex-1 px-4 py-3 bg-neutral-100 dark:bg-neutral-800 border-0 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-200 dark:focus:ring-neutral-700 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-white"
               disabled={isLoading}
             />
             <button
               onClick={sendMessage}
               disabled={!input.trim() || isLoading}
-              className="px-5 py-3 bg-neutral-900 hover:bg-black text-white rounded-2xl font-bold text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+              className="px-5 py-3 bg-neutral-900 dark:bg-white hover:bg-black dark:hover:bg-neutral-200 text-white dark:text-black rounded-2xl font-bold text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
             >
               Send
             </button>

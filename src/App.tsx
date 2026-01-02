@@ -18,6 +18,7 @@ const ChatPage = React.lazy(() => import('@features/Chat/ChatPage'))
 const Login = React.lazy(() => import('@features/Auth/Login'))
 const PublicProfile = React.lazy(() => import('@features/Profile/PublicProfile'))
 const Leaderboard = React.lazy(() => import('@features/Leaderboard/Leaderboard'))
+const Settings = React.lazy(() => import('@features/Settings/Settings'))
 
 function AppContent() {
   const { user } = useAuthStore()
@@ -27,7 +28,7 @@ function AppContent() {
   const isMobileChat = activeConversationId && location.pathname === '/messages'
   
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300 flex flex-col">
       {user && <Navigation />}
       {user && <ContinuumPopup />}
       <main className={`flex-1 ${user && !isMobileChat ? 'pb-20 lg:pb-0' : ''}`}>
@@ -83,6 +84,14 @@ function AppContent() {
               element={
                 <ProtectedRoute>
                   <ChatPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings />
                 </ProtectedRoute>
               }
             />

@@ -243,7 +243,7 @@ const GravityMap: React.FC = () => {
   // ... (previous useEffects)
 
   return (
-    <div className="relative w-full h-[calc(100vh-120px)] lg:h-[calc(100vh-80px)] bg-neutral-50 font-sans">
+    <div className="relative w-full h-[calc(100vh-120px)] lg:h-[calc(100vh-80px)] bg-neutral-50 dark:bg-neutral-900 font-sans transition-colors duration-300">
       <MapContainer
         center={[center.lat, center.lng]}
         zoom={zoom}
@@ -256,6 +256,7 @@ const GravityMap: React.FC = () => {
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          className="dark:invert dark:grayscale dark:contrast-125 dark:brightness-90 transition-all duration-300"
         />
 
         <MapController
@@ -468,7 +469,7 @@ const GravityMap: React.FC = () => {
         {/* Quest Navigator */}
         <button
           onClick={() => setShowGapNavigator(true)}
-          className="w-12 h-12 rounded-xl bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg flex items-center justify-center active:scale-90 transition-transform"
+          className="w-12 h-12 rounded-xl bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-lg flex items-center justify-center active:scale-90 transition-transform text-neutral-900 dark:text-white"
         >
           <span className="text-xl">⚡</span>
         </button>
@@ -476,7 +477,7 @@ const GravityMap: React.FC = () => {
         {/* Schedule */}
         <button
           onClick={() => setShowTimetable(true)}
-          className="w-12 h-12 rounded-xl bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg flex items-center justify-center active:scale-90 transition-transform"
+          className="w-12 h-12 rounded-xl bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-lg flex items-center justify-center active:scale-90 transition-transform text-neutral-900 dark:text-white"
         >
           <span className="text-xl">📅</span>
         </button>
@@ -487,8 +488,8 @@ const GravityMap: React.FC = () => {
             onClick={() => setShowCampusFilter(!showCampusFilter)}
             className={`w-12 h-12 rounded-xl shadow-lg flex items-center justify-center active:scale-90 transition-transform ${
               selectedCampus 
-                ? 'bg-neutral-900 text-white' 
-                : 'bg-white/90 backdrop-blur-xl border border-white/50'
+                ? 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900' 
+                : 'bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-white/50 dark:border-white/10 text-neutral-900 dark:text-white'
             }`}
           >
             <span className="text-xl">🏫</span>
@@ -511,8 +512,8 @@ const GravityMap: React.FC = () => {
           onClick={() => setHeatMapMode(!isHeatMapMode)}
           className={`w-12 h-12 rounded-xl shadow-lg flex items-center justify-center active:scale-90 transition-transform ${
             isHeatMapMode 
-              ? 'bg-neutral-900 text-white' 
-              : 'bg-white/90 backdrop-blur-xl border border-white/50'
+              ? 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900' 
+              : 'bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-white/50 dark:border-white/10 text-neutral-900 dark:text-white'
           }`}
         >
           <span className="text-xl">{isHeatMapMode ? '👁️' : '👻'}</span>
@@ -524,7 +525,7 @@ const GravityMap: React.FC = () => {
         <button
           onClick={() => setHeatMapMode(!isHeatMapMode)}
           className={`group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl transition-all active:scale-95 ${
-            isHeatMapMode ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-900 hover:bg-neutral-50'
+            isHeatMapMode ? 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900' : 'bg-white dark:bg-black text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900'
           }`}
         >
           <span className="text-base">{isHeatMapMode ? '👁️' : '👻'}</span>
@@ -533,7 +534,7 @@ const GravityMap: React.FC = () => {
 
         <button
           onClick={() => setShowGapNavigator(true)}
-          className="group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl bg-white text-neutral-900 hover:bg-neutral-50 active:scale-95"
+          className="group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl bg-white dark:bg-black text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900 active:scale-95"
         >
           <span className="text-base">⚡</span>
           <span>Gap Navigator</span>
@@ -541,7 +542,7 @@ const GravityMap: React.FC = () => {
 
         <button
           onClick={() => setShowTimetable(true)}
-          className="group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl bg-white text-neutral-900 hover:bg-neutral-50 active:scale-95"
+          className="group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl bg-white dark:bg-black text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900 active:scale-95"
         >
           <span className="text-base">📅</span>
           <span>Schedule</span>
@@ -559,7 +560,7 @@ const GravityMap: React.FC = () => {
           <button
             onClick={() => setShowCampusFilter(!showCampusFilter)}
             className={`group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl active:scale-95 ${
-              selectedCampus ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-900 hover:bg-neutral-50'
+              selectedCampus ? 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900' : 'bg-white dark:bg-black text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900'
             }`}
           >
             <span className="text-base">🏫</span>
@@ -596,10 +597,10 @@ const GravityMap: React.FC = () => {
       {showStudyBuddy && <StudyBuddy onClose={() => setShowStudyBuddy(false)} />}
 
       {locationError && (
-        <div className="fixed top-24 left-6 right-6 md:left-auto md:right-8 md:w-80 bg-white border border-red-100 rounded-3xl p-5 z-[1000] shadow-xl animate-reveal-up">
+        <div className="fixed top-24 left-6 right-6 md:left-auto md:right-8 md:w-80 bg-white dark:bg-neutral-900 border border-red-100 dark:border-red-900 rounded-3xl p-5 z-[1000] shadow-xl animate-reveal-up">
           <div className="flex gap-4">
             <span className="text-xl">⚠️</span>
-            <p className="text-sm text-neutral-600 font-medium leading-relaxed">{locationError}</p>
+            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-medium leading-relaxed">{locationError}</p>
           </div>
         </div>
       )}

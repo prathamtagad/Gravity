@@ -99,15 +99,15 @@ const ChatPage: React.FC = () => {
   const showChat = !!activeConversationId
 
   return (
-    <div className="h-[calc(100vh-80px)] md:h-[calc(100vh-80px)] bg-white md:bg-neutral-50 flex flex-col font-sans overflow-hidden"> 
-      <div className="flex-1 flex items-stretch min-h-0 bg-white md:m-4 md:rounded-[40px] md:shadow-[0_8px_40px_rgb(0,0,0,0.04)] md:border md:border-neutral-100 overflow-hidden">
+    <div className="h-[calc(100vh-80px)] md:h-[calc(100vh-80px)] bg-white dark:bg-neutral-900 md:bg-neutral-50 dark:md:bg-neutral-900 flex flex-col font-sans overflow-hidden transition-colors duration-300"> 
+      <div className="flex-1 flex items-stretch min-h-0 bg-white dark:bg-black md:m-4 md:rounded-[40px] md:shadow-[0_8px_40px_rgb(0,0,0,0.04)] dark:md:shadow-none md:border md:border-neutral-100 dark:md:border-neutral-800 overflow-hidden transition-colors duration-300">
           <div className={`
-            w-full md:w-[400px] flex flex-col border-r border-neutral-100 bg-white md:bg-neutral-50/30
+            w-full md:w-[400px] flex flex-col border-r border-neutral-100 dark:border-neutral-800 bg-white dark:bg-black md:bg-neutral-50/30 dark:md:bg-neutral-900/30 transition-colors
             ${showChat ? 'hidden md:flex' : 'flex'}
           `}>
-            <div className="px-6 py-6 md:px-10 md:py-12 flex justify-between items-center bg-white/40 sticky top-0 z-10">
-                 <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight">Messages</h1>
-                 <button className="w-10 h-10 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-all">
+            <div className="px-6 py-6 md:px-10 md:py-12 flex justify-between items-center bg-white/40 dark:bg-black/40 sticky top-0 z-10 backdrop-blur-sm">
+                 <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white tracking-tight">Messages</h1>
+                 <button className="w-10 h-10 rounded-full bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm flex items-center justify-center text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" /></svg>
                  </button>
             </div>
@@ -115,14 +115,14 @@ const ChatPage: React.FC = () => {
             <div className="px-6 md:px-8 mb-6 md:mb-8">
                 <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg className="w-5 h-5 text-neutral-400 group-focus-within:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        <svg className="w-5 h-5 text-neutral-400 group-focus-within:text-neutral-900 dark:group-focus-within:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </div>
                     <input 
                         type="text" 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search conversations..." 
-                        className="block w-full pl-10 pr-3 py-3.5 border-none rounded-2xl leading-5 bg-neutral-100 text-neutral-900 placeholder-neutral-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-neutral-900/5 transition-all shadow-sm"
+                        className="block w-full pl-10 pr-3 py-3.5 border-none rounded-2xl leading-5 bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-neutral-900/5 dark:focus:ring-white/10 transition-all shadow-sm"
                     />
                 </div>
             </div>
@@ -133,8 +133,8 @@ const ChatPage: React.FC = () => {
                         {searchQuery ? (
                             <>
                                 <div className="text-3xl mb-2">🔍</div>
-                                <h3 className="text-neutral-900 font-bold">No results found</h3>
-                                <p className="text-neutral-500 text-sm mt-1">Try a different name</p>
+                                <h3 className="text-neutral-900 dark:text-white font-bold">No results found</h3>
+                                <p className="text-neutral-500 dark:text-neutral-400 text-sm mt-1">Try a different name</p>
                             </>
                         ) : (
                             <EmptyState 
@@ -162,19 +162,19 @@ const ChatPage: React.FC = () => {
                                onClick={() => handleConversationClick(conv)}
                                className={`
                                  group flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all relative stagger-item border border-transparent
-                                 ${isActive ? 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] border-neutral-100 scale-[1.02]' : 'hover:bg-neutral-50 hover:scale-[1.01]'}
+                                 ${isActive ? 'bg-white dark:bg-neutral-900 shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-none border-neutral-100 dark:border-neutral-800 scale-[1.02]' : 'hover:bg-neutral-50 dark:hover:bg-neutral-900 hover:scale-[1.01]'}
                                `}
                                style={{ animationDelay: `${index * 0.05}s` }}
                             >
                                 <div className="relative shrink-0">
-                                    <img src={partner.photoURL || '/default-avatar.png'} className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border border-neutral-100" />
-                                    {isActive && <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full hidden md:block" />}
+                                    <img src={partner.photoURL || '/default-avatar.png'} className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border border-neutral-100 dark:border-neutral-800" />
+                                    {isActive && <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-black rounded-full hidden md:block" />}
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex justify-between items-baseline mb-0.5">
-                                        <h3 className={`font-semibold text-[15px] truncate ${isActive ? 'text-neutral-900' : 'text-neutral-900'}`}>{partner.displayName}</h3>
+                                        <h3 className={`font-semibold text-[15px] truncate ${isActive ? 'text-neutral-900 dark:text-white' : 'text-neutral-900 dark:text-white'}`}>{partner.displayName}</h3>
                                     </div>
-                                    <p className={`text-sm truncate ${conv.lastMessage?.senderId !== user.uid && !conv.lastMessage?.read ? 'text-neutral-900 font-bold' : 'text-neutral-500 font-normal'}`}>
+                                    <p className={`text-sm truncate ${conv.lastMessage?.senderId !== user.uid && !conv.lastMessage?.read ? 'text-neutral-900 dark:text-white font-bold' : 'text-neutral-500 dark:text-neutral-400 font-normal'}`}>
                                         {conv.lastMessage?.text || 'Sent an image'}
                                     </p>
                                 </div>
@@ -186,7 +186,7 @@ const ChatPage: React.FC = () => {
           </div>
 
           <div className={`
-            flex-1 flex flex-col bg-white relative
+            flex-1 flex flex-col bg-white dark:bg-black relative
             ${showChat ? 'fixed inset-0 z-[2000] w-full h-[100dvh] overscroll-none md:static md:h-full md:flex-1 md:z-0' : 'hidden md:flex md:flex-1 h-full'}
           `}>
               {!activeConversationId ? (
@@ -199,12 +199,12 @@ const ChatPage: React.FC = () => {
                   </div>
               ) : (
                  <>
-                    <div className="h-[60px] px-4 md:px-6 flex items-center border-b border-neutral-100 bg-white sticky top-0 z-30 shrink-0">
+                    <div className="h-[60px] px-4 md:px-6 flex items-center border-b border-neutral-100 dark:border-neutral-800 bg-white dark:bg-black sticky top-0 z-30 shrink-0 transition-colors">
                         <button 
                           onClick={() => openInbox()}
-                          className="mr-3 -ml-2 p-2 hover:bg-neutral-50 rounded-full transition-colors md:hidden"
+                          className="mr-3 -ml-2 p-2 hover:bg-neutral-50 dark:hover:bg-neutral-900 rounded-full transition-colors md:hidden"
                         >
-                            <svg className="w-6 h-6 text-neutral-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                            <svg className="w-6 h-6 text-neutral-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                         </button>
                         
                         <div 
@@ -213,10 +213,10 @@ const ChatPage: React.FC = () => {
                         >
                             <img 
                               src={activeRecipient?.photoURL || '/default-avatar.png'} 
-                              className="w-9 h-9 rounded-full border border-neutral-100 object-cover"
+                              className="w-9 h-9 rounded-full border border-neutral-100 dark:border-neutral-800 object-cover"
                             />
                             <div className="flex flex-col">
-                                <h2 className="font-semibold text-neutral-900 text-[15px] leading-tight flex items-center gap-1">
+                                <h2 className="font-semibold text-neutral-900 dark:text-white text-[15px] leading-tight flex items-center gap-1">
                                     {activeRecipient?.displayName}
                                     {activeRecipient?.orbitStatus === 'In Orbit' && <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />}
                                 </h2>
@@ -224,20 +224,20 @@ const ChatPage: React.FC = () => {
                             </div>
                         </div>
                         
-                        <div className="flex gap-4 text-neutral-900">
+                        <div className="flex gap-4 text-neutral-900 dark:text-white">
                              <button><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg></button>
                              <button><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
                         </div>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 bg-white scroll-smooth custom-scrollbar min-h-0">
+                    <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 bg-white dark:bg-black scroll-smooth custom-scrollbar min-h-0 transition-colors">
                         {messages.length === 0 && (
                             <div className="flex flex-col items-center justify-center pt-20 pb-10 grayscale opacity-50">
                                 <img 
                                   src={activeRecipient?.photoURL || '/default-avatar.png'} 
-                                  className="w-24 h-24 rounded-full mb-4 border-4 border-neutral-50 shadow-sm object-cover"
+                                  className="w-24 h-24 rounded-full mb-4 border-4 border-neutral-50 dark:border-neutral-900 shadow-sm object-cover"
                                 />
-                                <h3 className="text-xl font-bold text-neutral-900">{activeRecipient?.displayName}</h3>
+                                <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{activeRecipient?.displayName}</h3>
                                 <p className="text-sm text-neutral-400">Instagram-style Direct Messages</p>
                             </div>
                         )}
@@ -270,8 +270,8 @@ const ChatPage: React.FC = () => {
                                         <div className={`
                                             max-w-[70%] px-4 py-2.5 text-[15px] leading-relaxed break-words
                                             ${isMe 
-                                                ? 'bg-neutral-950 text-white rounded-[20px] rounded-br-[4px]' 
-                                                : 'bg-neutral-100 text-black rounded-[20px] rounded-bl-[4px]'
+                                                ? 'bg-neutral-950 dark:bg-white text-white dark:text-black rounded-[20px] rounded-br-[4px]' 
+                                                : 'bg-neutral-100 dark:bg-neutral-900 text-black dark:text-white rounded-[20px] rounded-bl-[4px]'
                                             }
                                             ${isSequenceTop && isMe ? 'rounded-tr-[4px]' : ''}
                                             ${isSequenceBottom && isMe ? 'rounded-br-[20px]' : ''}
@@ -287,10 +287,10 @@ const ChatPage: React.FC = () => {
                         <div ref={messagesEndRef} />
                     </div>
 
-                    <div className="p-4 md:p-6 bg-white shrink-0 pb-safe">
-                        <div className="flex items-center gap-3 bg-neutral-100 rounded-[28px] p-2 pl-2 transition-all ring-1 ring-transparent focus-within:ring-neutral-200 focus-within:bg-white">
-                            <button className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center shrink-0 cursor-pointer hover:scale-105 transition-transform active:scale-95 shadow-md group">
-                                <svg className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <div className="p-4 md:p-6 bg-white dark:bg-black shrink-0 pb-safe transition-colors">
+                        <div className="flex items-center gap-3 bg-neutral-100 dark:bg-neutral-900 rounded-[28px] p-2 pl-2 transition-all ring-1 ring-transparent focus-within:ring-neutral-200 dark:focus-within:ring-neutral-800 focus-within:bg-white dark:focus-within:bg-neutral-900">
+                            <button className="w-10 h-10 rounded-full bg-neutral-900 dark:bg-white flex items-center justify-center shrink-0 cursor-pointer hover:scale-105 transition-transform active:scale-95 shadow-md group">
+                                <svg className="w-5 h-5 text-white dark:text-black group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                             </button>
                             
                             <textarea 
@@ -304,20 +304,20 @@ const ChatPage: React.FC = () => {
                                     }
                                 }}
                                 placeholder="Write a message..."
-                                className="flex-1 bg-transparent border-none outline-none text-neutral-900 placeholder:text-neutral-400 text-[15px] resize-none py-2.5 px-1 font-medium leading-relaxed"
+                                className="flex-1 bg-transparent border-none outline-none text-neutral-900 dark:text-white placeholder:text-neutral-400 text-[15px] resize-none py-2.5 px-1 font-medium leading-relaxed"
                                 style={{ minHeight: '44px', maxHeight: '120px' }}
                             />
                             
                             {inputText.trim() ? (
                                 <button 
                                     onClick={() => handleSend()}
-                                    className="px-5 py-2.5 bg-neutral-900 text-white font-bold text-sm rounded-full hover:bg-black transition-all shadow-md active:scale-95"
+                                    className="px-5 py-2.5 bg-neutral-900 dark:bg-white text-white dark:text-black font-bold text-sm rounded-full hover:bg-black dark:hover:bg-neutral-200 transition-all shadow-md active:scale-95"
                                 >
                                     Send
                                 </button>
                             ) : (
                                 <div className="flex items-center gap-1 pr-3 text-neutral-400">
-                                   <button className="p-2 hover:bg-neutral-200 rounded-full transition-colors hover:text-neutral-900"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
+                                   <button className="p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-full transition-colors hover:text-neutral-900 dark:hover:text-white"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
                                 </div>
                             )}
                         </div>
@@ -329,7 +329,7 @@ const ChatPage: React.FC = () => {
 
       {showXp && (
         <div className="fixed inset-0 pointer-events-none z-[3000] flex items-center justify-center">
-            <div className="bg-neutral-900/90 backdrop-blur-md text-white px-6 py-3 rounded-full shadow-2xl animate-float-up flex items-center gap-3 border border-white/10">
+            <div className="bg-neutral-900/90 dark:bg-white/90 backdrop-blur-md text-white dark:text-black px-6 py-3 rounded-full shadow-2xl animate-float-up flex items-center gap-3 border border-white/10 dark:border-black/10">
                 <span className="text-xl">✨</span>
                 <span className="text-sm font-bold tracking-widest">+5 MASS</span>
             </div>
