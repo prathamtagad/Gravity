@@ -34,6 +34,8 @@ build
 
 # Capacitor
 android
+
+
 ios
 
 # Firebase
@@ -44,3 +46,12 @@ firebase-debug.log
 
 DEMO_SCRIPT.md
 cleanup_comments.js
+ic_launcher_fix.xml
+replace_icons.js
+temp_ic_launcher_fix.xml
+update_icons.js
+update_icons.py
+temp_ic_launcher_bypass.xml
+temp_ic_launcher_restore.xml
+temp_ic_launcher.xml
+verify_icons.js

@@ -1,181 +1,287 @@
-# 🪐 Gravity Study
+<p align="center">
+  <img src="./logo.png" width="180" alt="Gravity Study Logo"/>
+</p>
 
-> **Hack'Vento 2026 | PS-5: Adaptive Student Time Utilization**
->
-> Transform dead time into productive study time with AI-powered micro-quests
+<h1 align="center">🪐 Gravity Study</h1>
 
-[![Built with Firebase](https://img.shields.io/badge/Built%20with-Firebase-FFCA28?style=flat&logo=firebase)](https://firebase.google.com/)
-[![Powered by Gemini](https://img.shields.io/badge/Powered%20by-Gemini%20AI-4285F4?style=flat&logo=google)](https://ai.google.dev/)
-[![Made for GDG](https://img.shields.io/badge/Made%20for-GDG%20on%20Campus-EA4335?style=flat&logo=google)](https://developers.google.com/)
+<p align="center">
+  <b>Transform dead time into productive study time with AI-powered micro-quests</b>
+</p>
+
+<p align="center">
+  <i>Hack'Vento 2026 | PS-5: Adaptive Student Time Utilization</i>
+</p>
+
+<p align="center">
+  <a href="https://firebase.google.com/"><img src="https://img.shields.io/badge/Built%20with-Firebase-FFCA28?style=for-the-badge&logo=firebase" alt="Firebase"/></a>
+  <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Powered%20by-Gemini%20AI-4285F4?style=for-the-badge&logo=google" alt="Gemini AI"/></a>
+  <a href="https://developers.google.com/"><img src="https://img.shields.io/badge/Made%20for-GDG%20Campus-EA4335?style=for-the-badge&logo=google" alt="GDG"/></a>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-documentation">Docs</a> •
+  <a href="#-demo">Demo</a> •
+  <a href="#-team">Team</a>
+</p>
 
 ---
 
-## 🎯 The Problem
+## 🌌 The Vision
+
+> *"Your gaps, our gravity. Pull yourself towards progress."*
 
 Students waste **2+ hours daily** in unplanned gaps between classes. When lectures get cancelled or schedules misalign, this downtime becomes mindless scrolling instead of meaningful learning.
 
-## 💡 Our Solution
-
-**Gravity Study** is an AI-powered student productivity platform that:
-
-1. 📅 **Detects free time gaps** from your class timetable
-2. ✨ **Generates personalized micro-quests** using Gemini AI
-3. 🗺️ **Connects nearby students** for spontaneous study sessions
-4. 🎮 **Gamifies productivity** with XP, levels, and leaderboards
+**Gravity Study** uses AI to transform those gaps into opportunities.
 
 ---
 
-## ✨ Features
+## ✨ What Makes Us Special
 
-| Feature | Description | Google Tech |
-|---------|-------------|-------------|
-| **Gap Navigator** | AI suggests activities that fit your available time | Gemini AI |
-| **Timetable Sync** | Enter schedule, auto-detect gaps | Firebase |
-| **Gravity Map** | See nearby students & campus study spots | Leaflet + Firebase |
-| **BlackHole Timer** | Immersive focus mode countdown | — |
-| **Orbit Status** | Set availability, match with study partners | Firebase Realtime |
-| **Campus Hotspots** | Pre-mapped library, labs, quiet zones | Firebase |
-| **XP & Leaderboards** | Gamified progression system | Firestore |
+<table>
+<tr>
+<td width="50%">
+
+### 🎯 Smart Gap Detection
+Your timetable + our algorithm = automatic free time detection. Know exactly when you have gaps before they happen.
+
+</td>
+<td width="50%">
+
+### 🤖 AI-Powered Micro-Quests
+Gemini AI generates personalized study activities that fit your available time and subjects.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🗺️ Social Discovery
+See nearby students on the Gravity Map. Find study buddies based on proximity and availability.
+
+</td>
+<td width="50%">
+
+### 🎮 Gamified Progress
+XP, levels, streaks, leaderboards. Make productivity addictive with space-themed gamification.
+
+</td>
+</tr>
+</table>
 
 ---
 
-## 🚀 Demo Flow
+## 🚀 Quick Start
+
+```bash
+# 1. Clone & Install
+git clone https://github.com/your-username/gravity-study.git
+cd gravity-study
+npm install
+
+# 2. Configure Environment
+cp .env.example .env
+# Edit .env with your Firebase + Gemini keys
+
+# 3. Launch
+npm run dev          # Web
+npm run electron:dev # Desktop
+```
+
+> 📖 **Need detailed setup?** See [SETUP.md](./SETUP.md) for complete instructions including Firebase configuration.
+
+---
+
+## 🛸 Core Features
+
+| Feature | Description | Powered By |
+|:--------|:------------|:-----------|
+| 📅 **Timetable Sync** | Input your schedule, auto-detect free gaps | Firebase |
+| 🎯 **Gap Navigator** | AI suggests 5-60 min activities | Gemini AI |
+| 🕳️ **BlackHole Timer** | Immersive focus mode countdown | — |
+| 🗺️ **Gravity Map** | See nearby students & campus hotspots | Leaflet + Firebase |
+| 🟢 **Orbit Status** | Set your availability (Available/Maybe/Busy) | Firebase Realtime |
+| 💥 **Collision System** | Request study sessions with nearby peers | Firebase |
+| 💬 **Real-time Chat** | Message your study buddies | Firebase |
+| 🏆 **Leaderboard** | Compete with XP and streaks | Firestore |
+
+> 🎬 **See all features in action!** Check out the [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md) for a complete walkthrough with screenshots.
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|:---------|:------------|
+| 📖 [**PROJECT_OVERVIEW.md**](./PROJECT_OVERVIEW.md) | Complete feature walkthrough with screenshots |
+| 🛠️ [**SETUP.md**](./SETUP.md) | Detailed installation & configuration guide |
+| 🔥 [**FIREBASE_SETUP.md**](./FIREBASE_SETUP.md) | Firebase project setup instructions |
+| 🎤 [**PITCH.md**](./PITCH.md) | One-page pitch document for presentations |
+| 🎬 [**DEMO_SCRIPT.md**](./DEMO_SCRIPT.md) | Step-by-step demo flow guide |
+
+---
+
+## 💫 Demo Flow
 
 ```
-1. Student logs in → Google Auth
-2. Enters timetable → Gap detection runs
-3. Opens Gap Navigator → "You have 45 minutes free!"
-4. Gemini suggests: "Review DSA on YouTube (20 min)" 
-5. Student starts quest → Focus Timer activates
-6. Nearby peers appear on Gravity Map
-7. Complete quest → Earn 200 XP, climb leaderboard
+┌─────────────────────────────────────────────────────────────┐
+│  1. 🔐 Login with Google                                    │
+│              ↓                                              │
+│  2. 📅 Enter your Timetable                                 │
+│              ↓                                              │
+│  3. 🎯 Gap Navigator: "You have 45 minutes free!"           │
+│              ↓                                              │
+│  4. 🤖 Gemini suggests: "Review DSA arrays (20 min)"        │
+│              ↓                                              │
+│  5. 🕳️ Start Quest → BlackHole Timer activates              │
+│              ↓                                              │
+│  6. 🗺️ Nearby peers appear on Gravity Map                   │
+│              ↓                                              │
+│  7. ✅ Complete quest → Earn 200 XP, climb leaderboard!     │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | React 18, TypeScript, Vite |
-| **Styling** | Tailwind CSS |
-| **State** | Zustand |
-| **AI** | Google Gemini 2.0 Flash |
-| **Backend** | Firebase (Auth, Firestore) |
-| **Maps** | Leaflet + OpenStreetMap |
-| **Mobile** | Capacitor (Android) |
-| **Desktop** | Electron (Windows) |
+<table>
+<tr>
+<td align="center" width="96">
+<img src="https://skillicons.dev/icons?i=react" width="48" height="48" alt="React" />
+<br>React 18
+</td>
+<td align="center" width="96">
+<img src="https://skillicons.dev/icons?i=ts" width="48" height="48" alt="TypeScript" />
+<br>TypeScript
+</td>
+<td align="center" width="96">
+<img src="https://skillicons.dev/icons?i=vite" width="48" height="48" alt="Vite" />
+<br>Vite
+</td>
+<td align="center" width="96">
+<img src="https://skillicons.dev/icons?i=tailwind" width="48" height="48" alt="Tailwind" />
+<br>Tailwind
+</td>
+<td align="center" width="96">
+<img src="https://skillicons.dev/icons?i=firebase" width="48" height="48" alt="Firebase" />
+<br>Firebase
+</td>
+</tr>
+<tr>
+<td align="center" width="96">
+<img src="https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg" width="48" height="48" alt="Gemini" />
+<br>Gemini AI
+</td>
+<td align="center" width="96">
+<img src="https://skillicons.dev/icons?i=electron" width="48" height="48" alt="Electron" />
+<br>Electron
+</td>
+<td align="center" width="96">
+<img src="https://capacitorjs.com/docs/img/logo-light.svg" width="48" height="48" alt="Capacitor" />
+<br>Capacitor
+</td>
+<td align="center" width="96">
+<img src="https://leafletjs.com/docs/images/logo.png" width="48" height="48" alt="Leaflet" />
+<br>Leaflet
+</td>
+<td align="center" width="96">
+<img src="https://zustand-demo.pmnd.rs/assets/bear-BctLmfiY.jpg" width="48" height="48" alt="Zustand" />
+<br>Zustand
+</td>
+</tr>
+</table>
 
 ---
 
-## 📦 Quick Start
+## 🏫 Built for IET DAVV, Indore
 
-### Prerequisites
-- Node.js 18+
-- Firebase project
-- Gemini API key (optional, has fallback)
+Pre-configured campus hotspots ready for use:
 
-### Installation
+| 📚 IET Central Library | 💻 CS Lab Block | ☕ IET Canteen |
+|:----------------------:|:---------------:|:--------------:|
+| 🌳 Campus Garden | 📝 Seminar Hall | 🎯 Main Lobby |
 
-```bash
-# Clone and install
-git clone https://github.com/your-username/gravity-study.git
-cd gravity-study
-npm install
-
-# Set up environment
-cp .env.example .env
-# Edit .env with your Firebase and Gemini keys
-
-# Run development server
-npm run dev
-```
-
-### Environment Variables
-
-```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_GEMINI_API_KEY=your_gemini_key  # Optional
-```
+**Campus Coordinates:** `22.6811°N, 75.8800°E`
 
 ---
 
-## 📁 Project Structure
-
-```
-src/
-├── components/       # Reusable UI components
-├── features/         # Feature modules
-│   ├── GapNavigator/ # AI-powered quest suggestions
-│   ├── Timetable/    # Schedule management
-│   ├── GravityMap/   # Map with users & hotspots
-│   ├── BlackHole/    # Focus timer
-│   └── Profile/      # User profile & settings
-├── services/
-│   ├── ai/           # Gemini integration
-│   ├── firebase/     # Auth, Firestore, etc.
-│   └── map/          # Campus hotspots
-├── stores/           # Zustand state management
-└── types/            # TypeScript definitions
-```
-
----
-
-## 🏫 Campus: IET DAVV, Indore
-
-This app is built for **IET DAVV** campus with pre-configured study hotspots:
-- 📚 IET Central Library
-- 💻 CS Lab Block  
-- ☕ IET Canteen
-- 🌳 Campus Garden
-- 📝 Seminar Hall Area
-- 🎯 Main Building Lobby
-
-Coordinates: `22.6811°N, 75.8800°E`
-
----
-
-## 🧪 Available Scripts
+## 📦 Available Scripts
 
 | Command | Description |
-|---------|-------------|
+|:--------|:------------|
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production |
 | `npm run electron:dev` | Run Electron app |
 | `npm run electron:build` | Build Windows desktop app |
-| `npm run capacitor:android` | Run on Android |
+| `npm run capacitor:android` | Run on Android device |
+
+---
+
+## 🌐 Live Demo
+
+<p align="center">
+  <a href="https://gravity-study.netlify.app/">
+    <img src="https://img.shields.io/badge/🌐_Web_App-Visit_Now-blue?style=for-the-badge" alt="Web App"/>
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/username/gravity-study/releases">
+    <img src="https://img.shields.io/badge/📱_Android_APK-Download-green?style=for-the-badge" alt="Android APK"/>
+  </a>
+</p>
 
 ---
 
 ## 👥 Team
 
-Built for **Hack'Vento 2026** by GDG on Campus IET DAVV
+<table>
+<tr>
+<td align="center">
+<b>Pratham</b><br/>
+<sub>Lead Software Engineer</sub><br/>
+<sub>Full Stack & Architecture</sub><br/>
+<a href="https://github.com/prathamtagad">
+<img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github" alt="GitHub"/>
+</a>
+</td>
+<td align="center">
+<b>Prashray</b><br/>
+<sub>AI & Data Specialist</sub><br/>
+<sub>Gemini Algorithms & Logic</sub><br/>
+<a href="https://github.com/Prashray21">
+<img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github" alt="GitHub"/>
+</a>
+</td>
+<td align="center">
+<b>Samarth</b><br/>
+<sub>Product Designer</sub><br/>
+<sub>UI/UX & Frontend Interaction</sub><br/>
+<a href="https://github.com/Samarthpurohit">
+<img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github" alt="GitHub"/>
+</a>
+</td>
+</tr>
+</table>
 
-| Name | Role | GitHub |
-|------|------|--------|
-| Pratham | **Lead Software Engineer** (Full Stack & Architecture) | [@prathamtagad](https://github.com/prathamtagad) |
-| Prashray | **AI & Data Specialist** (Gemini Algorithms & Logic) | [@Prashray21](https://github.com/Prashray21) |
-| Samarth | **Product Designer** (UI/UX & Frontend Interaction) | [@Samarthpurohit](https://github.com/Samarthpurohit) |
----
-
-## 🌐 Live Demo
-
-- **Web App**: [gravity-study.vercel.app](https://gravity-study.netlify.app/)
-- **Demo Video**: [YouTube Link](https://youtube.com/watch?v=xxxxx) *(Add after recording)*
-- **APK Download**: [Releases](https://github.com/username/gravity-study/releases)
+<p align="center">
+  Built with ❤️ for <b>Hack'Vento 2026</b> | GDG on Campus IET DAVV
+</p>
 
 ---
 
 ## 📄 License
 
-MIT License - feel free to use for your own campus!
+MIT License — feel free to adapt for your own campus!
 
 ---
 
 <p align="center">
+  <img src="./logo.png" width="60" alt="Gravity Study"/>
+</p>
+
+<p align="center">
+  <b>🪐 Gravity Study</b><br/>
   <i>"Your gaps, our gravity. Pull yourself towards progress."</i>
 </p>
