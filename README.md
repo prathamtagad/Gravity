@@ -266,7 +266,7 @@ Pre-configured campus hotspots ready for use:
 </table>
 
 <p align="center">
-  Built with ❤️ for <b>Hack'Vento 2026</b> | GDG on Campus IET DAVV
+  Built with ❤️ for <b>Hack'Vento 2026</b> by AKATSUKI | GDG on Campus IET DAVV
 </p>
 
 ---
