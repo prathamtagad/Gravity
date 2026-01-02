@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { UserProfile } from '@/types/user'
 import { useImpactStore } from '@stores/impactStore'
+import ShareStats from './ShareStats'
 
 interface ProfileViewProps {
   profile: UserProfile
@@ -9,6 +10,7 @@ interface ProfileViewProps {
 
 const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
   const { stats } = useImpactStore()
+  const [showShareStats, setShowShareStats] = useState(false)
   
   return (
     <div className="w-full animate-reveal-up font-sans">
@@ -45,13 +47,23 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile, onEdit }) => {
                       </div>
                   </div>
 
-                  <button 
-                      onClick={onEdit}
-                      className="px-10 py-4 bg-white hover:bg-neutral-50 text-neutral-900 border border-neutral-200 rounded-2xl text-[11px] font-bold uppercase tracking-widest transition-all shadow-sm active:scale-95"
-                  >
-                      Edit Profile
-                  </button>
+                  <div className="flex gap-3">
+                      <button 
+                          onClick={() => setShowShareStats(true)}
+                          className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white rounded-2xl text-[11px] font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                      >
+                          📤 Share
+                      </button>
+                      <button 
+                          onClick={onEdit}
+                          className="px-10 py-4 bg-white hover:bg-neutral-50 text-neutral-900 border border-neutral-200 rounded-2xl text-[11px] font-bold uppercase tracking-widest transition-all shadow-sm active:scale-95"
+                      >
+                          Edit Profile
+                      </button>
+                  </div>
               </div>
+
+              {showShareStats && <ShareStats profile={profile} onClose={() => setShowShareStats(false)} />}
 
               <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-8 mt-24">
                   <div className="flex flex-col">

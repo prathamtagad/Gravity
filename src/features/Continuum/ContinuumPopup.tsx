@@ -3,9 +3,10 @@ import React from 'react'
 import { useUserStore } from '@stores/userStore'
 
 const ContinuumPopup: React.FC = () => {
-  const { activeQuest } = useUserStore()
+  const { activeQuest, profile } = useUserStore()
 
-  if (!activeQuest) return null
+  // Hide if no quest or if timer is already running
+  if (!activeQuest || profile?.orbitStatus === 'Event Horizon') return null
 
   return (
     <div className="fixed bottom-6 right-6 z-[4000] animate-slide-up">
@@ -29,7 +30,7 @@ const ContinuumPopup: React.FC = () => {
                            eventHorizonEndTime: Date.now() + (activeQuest.duration * 60 * 1000)
                        })
                    }
-                   useUserStore.getState().setActiveQuest(null)
+                   // Don't clear activeQuest here - BlackHoleTimer needs it to display quest info
                 }}
             >
                 Start Quest

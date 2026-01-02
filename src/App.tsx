@@ -9,7 +9,7 @@ import Loading from '@components/Loading/Loading'
 import Navigation from '@components/Navigation/Navigation'
 import { useTimetableStore } from '@stores/timetableStore'
 import { requestNotificationPermission, sendGapNotification } from '@services/notifications/notificationService'
-import { handleRedirectResult } from '@services/firebase/authService'
+
 
 const GravityMap = React.lazy(() => import('@features/GravityMap/GravityMap'))
 const Profile = React.lazy(() => import('@features/Profile/Profile'))
@@ -101,7 +101,6 @@ function App() {
 
   useEffect(() => {
     initializeAuth()
-    handleRedirectResult()
     requestNotificationPermission()
   }, [initializeAuth])
 

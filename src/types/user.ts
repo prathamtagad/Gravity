@@ -25,6 +25,9 @@ export interface UserProfile {
   mass: number
   level: number
   rank?: string
+  streak: number
+  lastActiveDate?: string
+  totalQuests: number
   followersCount: number
   followingCount: number
   messageCount?: number

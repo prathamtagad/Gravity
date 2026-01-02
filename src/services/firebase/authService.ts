@@ -1,7 +1,6 @@
 import {
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
+  signInWithCredential,
   GoogleAuthProvider,
   signOut as firebaseSignOut,
   onAuthStateChanged,
@@ -9,18 +8,29 @@ import {
 } from 'firebase/auth'
 import { auth } from './config'
 import { Capacitor } from '@capacitor/core'
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
 
 const googleProvider = new GoogleAuthProvider()
 
-const isNativePlatform = () => {
-  return Capacitor.isNativePlatform()
+const initGoogleAuth = () => {
+  if (Capacitor.isNativePlatform()) {
+    GoogleAuth.initialize({
+      clientId: '54480158682-p9jh7jamp4275sd07nilgodd4hajjmq5.apps.googleusercontent.com',
+      scopes: ['profile', 'email'],
+      grantOfflineAccess: true,
+    })
+  }
 }
+
+initGoogleAuth()
 
 export const signInWithGoogle = async () => {
   try {
-    if (isNativePlatform()) {
-      await signInWithRedirect(auth, googleProvider)
-      return null
+    if (Capacitor.isNativePlatform()) {
+      const googleUser = await GoogleAuth.signIn()
+      const credential = GoogleAuthProvider.credential(googleUser.authentication.idToken)
+      const result = await signInWithCredential(auth, credential)
+      return result.user
     } else {
       const result = await signInWithPopup(auth, googleProvider)
       return result.user
@@ -31,21 +41,11 @@ export const signInWithGoogle = async () => {
   }
 }
 
-export const handleRedirectResult = async () => {
-  try {
-    const result = await getRedirectResult(auth)
-    if (result) {
-      return result.user
-    }
-    return null
-  } catch (error) {
-    console.error('Error handling redirect result:', error)
-    throw error
-  }
-}
-
 export const signOut = async () => {
   try {
+    if (Capacitor.isNativePlatform()) {
+      await GoogleAuth.signOut()
+    }
     await firebaseSignOut(auth)
   } catch (error) {
     console.error('Error signing out:', error)

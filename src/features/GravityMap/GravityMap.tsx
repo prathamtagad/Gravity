@@ -16,6 +16,8 @@ import { getZoneStatus } from '@services/map/heatZoneService'
 import LiveActivityTicker from '@components/Map/LiveActivityTicker'
 import GapNavigator from '@features/GapNavigator/GapNavigator'
 import TimetableInput from '@features/Timetable/TimetableInput'
+import StudyBuddy from '@features/StudyBuddy/StudyBuddy'
+import CampusFilter from '@components/Map/CampusFilter'
 import { getCampusHotspots } from '@services/map/campusHotspots'
 import type { UserProfile, UserLocation } from '@/types/user'
 
@@ -208,11 +210,15 @@ const GravityMap: React.FC = () => {
 
   const [showGapNavigator, setShowGapNavigator] = useState(false)
   const [showTimetable, setShowTimetable] = useState(false)
+  const [showStudyBuddy, setShowStudyBuddy] = useState(false)
+  const [showCampusFilter, setShowCampusFilter] = useState(false)
+  const [selectedCampus, setSelectedCampus] = useState<string | null>(null)
   const [showHotspots] = useState(true)
 
-  const campusHotspots = profile?.location 
-    ? getCampusHotspots(profile.location.latitude, profile.location.longitude)
-    : []
+  const allHotspots = getCampusHotspots()
+  const campusHotspots = selectedCampus
+    ? allHotspots.filter(h => h.campus === selectedCampus)
+    : allHotspots
 
   const createHotspotIcon = (icon: string) => {
     return new DivIcon({
@@ -243,6 +249,7 @@ const GravityMap: React.FC = () => {
         zoom={zoom}
         style={{ height: '100%', width: '100%' }}
         zoomControl={false}
+        attributionControl={false}
         scrollWheelZoom={true}
         zoomAnimation={true}
       >
@@ -319,10 +326,11 @@ const GravityMap: React.FC = () => {
           >
             <Popup>
               <div className="p-4 w-56">
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">{hotspot.icon}</span>
                   <h3 className="font-bold text-neutral-900 text-lg leading-tight">{hotspot.name}</h3>
                 </div>
+                <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-2">{hotspot.campus}</p>
                 <p className="text-sm text-neutral-500 mb-4">{hotspot.description}</p>
                 <div className="space-y-2">
                   <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Best For</span>
@@ -447,41 +455,128 @@ const GravityMap: React.FC = () => {
         })}
       </MapContainer>
 
-      <div className="absolute top-24 left-6 z-[1000] flex flex-col gap-4">
+      {/* Mobile: Beautiful FAB buttons at bottom-left */}
+      <div className="absolute bottom-48 left-4 z-[1000] flex md:hidden flex-col gap-3">
+        {/* AI Buddy - Featured */}
+        <button
+          onClick={() => setShowStudyBuddy(true)}
+          className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-xl shadow-indigo-500/30 flex items-center justify-center active:scale-90 transition-transform"
+        >
+          <span className="text-2xl">🤖</span>
+        </button>
+
+        {/* Quest Navigator */}
+        <button
+          onClick={() => setShowGapNavigator(true)}
+          className="w-12 h-12 rounded-xl bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg flex items-center justify-center active:scale-90 transition-transform"
+        >
+          <span className="text-xl">⚡</span>
+        </button>
+
+        {/* Schedule */}
+        <button
+          onClick={() => setShowTimetable(true)}
+          className="w-12 h-12 rounded-xl bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg flex items-center justify-center active:scale-90 transition-transform"
+        >
+          <span className="text-xl">📅</span>
+        </button>
+
+        {/* Campus Filter */}
+        <div className="relative">
+          <button
+            onClick={() => setShowCampusFilter(!showCampusFilter)}
+            className={`w-12 h-12 rounded-xl shadow-lg flex items-center justify-center active:scale-90 transition-transform ${
+              selectedCampus 
+                ? 'bg-neutral-900 text-white' 
+                : 'bg-white/90 backdrop-blur-xl border border-white/50'
+            }`}
+          >
+            <span className="text-xl">🏫</span>
+          </button>
+          {showCampusFilter && (
+            <div className="absolute bottom-full left-0 mb-2 w-64 z-[1001]">
+              <CampusFilter
+                selectedCampus={selectedCampus}
+                onSelectCampus={(campus) => {
+                  setSelectedCampus(campus)
+                  setShowCampusFilter(false)
+                }}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Ghost Mode Toggle */}
         <button
           onClick={() => setHeatMapMode(!isHeatMapMode)}
-          className={`
-            group flex items-center gap-3 px-6 py-3.5 rounded-3xl font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95
-            ${isHeatMapMode 
-              ? 'bg-neutral-900 text-white border-neutral-800' 
-              : 'bg-white text-neutral-900 border-white hover:bg-neutral-50'}
-          `}
+          className={`w-12 h-12 rounded-xl shadow-lg flex items-center justify-center active:scale-90 transition-transform ${
+            isHeatMapMode 
+              ? 'bg-neutral-900 text-white' 
+              : 'bg-white/90 backdrop-blur-xl border border-white/50'
+          }`}
         >
-          <span className="text-lg">{isHeatMapMode ? '👁️' : '👻'}</span>
-          <span>{isHeatMapMode ? 'Standard Mode' : 'Campus Ghost'}</span>
-          {!isHeatMapMode && (
-             <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-             </span>
-          )}
+          <span className="text-xl">{isHeatMapMode ? '👁️' : '👻'}</span>
+        </button>
+      </div>
+
+      {/* Desktop: Original vertical layout */}
+      <div className="absolute top-24 left-6 z-[1000] hidden md:flex flex-col gap-3">
+        <button
+          onClick={() => setHeatMapMode(!isHeatMapMode)}
+          className={`group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl transition-all active:scale-95 ${
+            isHeatMapMode ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-900 hover:bg-neutral-50'
+          }`}
+        >
+          <span className="text-base">{isHeatMapMode ? '👁️' : '👻'}</span>
+          <span>{isHeatMapMode ? 'Standard' : 'Ghost Mode'}</span>
         </button>
 
         <button
           onClick={() => setShowGapNavigator(true)}
-          className="group flex items-center gap-3 px-6 py-3.5 rounded-3xl font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95 bg-white text-neutral-900 border-white hover:bg-neutral-50"
+          className="group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl bg-white text-neutral-900 hover:bg-neutral-50 active:scale-95"
         >
-           <span className="text-lg">⚡</span>
-           <span>Gap Navigator</span>
+          <span className="text-base">⚡</span>
+          <span>Gap Navigator</span>
         </button>
 
         <button
           onClick={() => setShowTimetable(true)}
-          className="group flex items-center gap-3 px-6 py-3.5 rounded-3xl font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95 bg-white text-neutral-900 border-white hover:bg-neutral-50"
+          className="group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl bg-white text-neutral-900 hover:bg-neutral-50 active:scale-95"
         >
-           <span className="text-lg">📅</span>
-           <span>My Schedule</span>
+          <span className="text-base">📅</span>
+          <span>Schedule</span>
         </button>
+
+        <button
+          onClick={() => setShowStudyBuddy(true)}
+          className="group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 active:scale-95"
+        >
+          <span className="text-base">🤖</span>
+          <span>AI Buddy</span>
+        </button>
+
+        <div className="relative">
+          <button
+            onClick={() => setShowCampusFilter(!showCampusFilter)}
+            className={`group flex items-center gap-3 px-5 py-3 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl active:scale-95 ${
+              selectedCampus ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-900 hover:bg-neutral-50'
+            }`}
+          >
+            <span className="text-base">🏫</span>
+            <span>{selectedCampus ? selectedCampus.slice(0, 10) : 'Campuses'}</span>
+          </button>
+          {showCampusFilter && (
+            <div className="absolute top-full left-0 mt-2 w-64">
+              <CampusFilter
+                selectedCampus={selectedCampus}
+                onSelectCampus={(campus) => {
+                  setSelectedCampus(campus)
+                  setShowCampusFilter(false)
+                }}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       <OrbitStatus
@@ -497,6 +592,8 @@ const GravityMap: React.FC = () => {
       {showGapNavigator && <GapNavigator onClose={() => setShowGapNavigator(false)} />}
 
       {showTimetable && <TimetableInput onClose={() => setShowTimetable(false)} />}
+
+      {showStudyBuddy && <StudyBuddy onClose={() => setShowStudyBuddy(false)} />}
 
       {locationError && (
         <div className="fixed top-24 left-6 right-6 md:left-auto md:right-8 md:w-80 bg-white border border-red-100 rounded-3xl p-5 z-[1000] shadow-xl animate-reveal-up">
