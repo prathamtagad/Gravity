@@ -180,7 +180,7 @@ npm run electron:dev # Desktop
 <br>Electron
 </td>
 <td align="center" width="96">
-<img src="https://capacitorjs.com/docs/img/logo-light.svg" width="48" height="48" alt="Capacitor" />
+<img src="https://w7.pngwing.com/pngs/462/829/png-transparent-capacitor-js-hd-logo.png" width="48" height="48" alt="Capacitor" />
 <br>Capacitor
 </td>
 <td align="center" width="96">
@@ -188,7 +188,7 @@ npm run electron:dev # Desktop
 <br>Leaflet
 </td>
 <td align="center" width="96">
-<img src="https://zustand-demo.pmnd.rs/assets/bear-BctLmfiY.jpg" width="48" height="48" alt="Zustand" />
+<img src="https://i.namu.wiki/i/lWcXbpCwKlTNMM2v_SiGVK5Q6XsnTOvH6txHs25DbpbP_XGDum3MfxpNHYDCGHxuqGeZaJ8PVZLWO9LJFGFGAA.webp" width="48" height="48" alt="Zustand" />
 <br>Zustand
 </td>
 </tr>
@@ -227,7 +227,7 @@ Pre-configured campus hotspots ready for use:
     <img src="https://img.shields.io/badge/🌐_Web_App-Visit_Now-blue?style=for-the-badge" alt="Web App"/>
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/username/gravity-study/releases">
+  <a href="https://github.com/prathamtagad/Gravity/releases/tag/Gravity-1.0.2">
     <img src="https://img.shields.io/badge/📱_Android_APK-Download-green?style=for-the-badge" alt="Android APK"/>
   </a>
 </p>
